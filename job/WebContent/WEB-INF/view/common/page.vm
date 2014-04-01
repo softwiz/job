@@ -1,0 +1,37 @@
+<script>
+function movePage(page){
+	$('#f').attr('action', '../adm/admlist.html');
+	$('#movedPage').val(page);
+	$('#f').submit();
+}
+</script>
+<div class="pagination">
+#if($pageElements.IS_PREVIOUS_BLOCK)
+[ <a href="javascript:movePage('$pageElements.FIRST_PAGE');" tabindex="-1">$pageElements.FIRST_PAGE</a>]
+...
+<a href="javascript:movePage('$pageElements.PREVIOUS_BLOCK_PAGE');" tabindex="-1"><img src="../imgs/common/btn_pprev.gif" border=0 align="absmiddle"></a>
+#end
+
+#if($pageElements.IS_PREVIOUS)
+<a href="javascript:movePage('$pageElements.PREVIOUS_PAGE');" tabindex="-1"><img src="../imgs/common/btn_prev.gif" border=0 align="absmiddle"></a>
+#end
+#foreach($page in $pageElements.PAGES)
+	#if($page == $pageElements.MOVED_PAGE)
+		<b>$page</b>
+	#else
+		[ <a href="javascript:movePage('$page');" tabindex="-1">$page</a> ]
+	#end
+#end
+
+#if($pageElements.IS_NEXT)
+<a href="javascript:movePage('$pageElements.NEXT_PAGE');" tabindex="-1"><img src="../imgs/common/btn_next.gif" border=0 align="absmiddle"></a>
+#end
+	#if($pageElements.IS_NEXT_BLOCK)
+<a href="javascript:movePage('$pageElements.NEXT_BLOCK_PAGE');" tabindex="-1"><img src="../imgs/common/btn_nnext.gif" border=0 align="absmiddle"></a>
+</td><td valign="bottom">
+...
+[ <a href="javascript:movePage('$pageElements.LAST_PAGE');" tabindex="-1">$pageElements.LAST_PAGE</a> ]
+#end
+</td>
+</div>
+

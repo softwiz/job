@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>：：：FOCUS WorkFLow：：：</title>
+    <META http-equiv="Expires" content="-1">
+	<META http-equiv="Pragma" content="no-cache">
+	<META http-equiv="Cache-Control" content="No-Cache">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="../common/css/common.css" media="screen">
+    <link rel="stylesheet" href="../common/css/jquery-ui-1.10.3.custom.css" media="screen">
+    <link rel="stylesheet" href="../common/css/select2.css" media="screen">
+    <link rel="stylesheet" href="../common/css/jquery.treeview.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../common/css/jquery.cleditor.css" />
+    <link href='../common/css/fullcalendar.css' rel='stylesheet' />
+	<link href='../common/css/fullcalendar.print.css' rel='stylesheet' media='print' />
+
+
+
+<script type="text/javascript" src="../common/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../common/js/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="../common/js/jquery-ui-1.10.3.custom.js"></script>
+<script type="text/javascript" src="../common/js/select2.js"></script>
+<script type="text/javascript" src="../common/js/jquery.treeview.js"></script>
+<script type="text/javascript" src="../common/js/jquery.cleditor.min.js"></script>
+<script type="text/javascript" src="../common/js/jquery.validate.js"></script>
+<script type="text/javascript" src="../common/js/additional-methods.js"></script>
+<script type="text/javascript" src="../common/js/common.js"></script>
+<script type="text/javascript" src='../common/js/fullcalendar.min.js'></script>
+<script type="text/javascript" src='../common/js/gcal.js'></script>
+
+</head>
+<body id="type-b">
+<div id="wrap">
+
+	<div id="header">
+		<div id="site-name">SOFTWIZ</div>
+		<ul id="nav">
+		<li id="mypage"><a href="../mypage/main.html">HOME</a></li>
+
+		<li id="adm">
+			<a href="../adm/admlist.html">案件管理</a>
+			<ul>
+				<li id="admlist"><a href="../adm/admlist.html">案件情報閲覧</a></li>
+				<li id="admlist2"><a href="../adm/admlist2.html?flag=2">進行中案件閲覧</a></li>
+				<li id="admlist3"><a href="../adm/admlist3.html?flag=3">承認済み案件閲覧</a></li>
+			</ul>
+		</li>
+		<li id="do">
+			<a href="../adm/admdolist.html">承認管理</a>
+			<ul>
+				<li id="admdo"><a href="../adm/admdolist.html">承認情報閲覧</a></li>
+				<li id="admdoing"><a href="../adm/admdoinglist.html">進行中承認閲覧</a></li>
+				<li id="admcomplete"><a href="../adm/admcompletedolist.html">承認済み承認閲覧</a></li>
+			</ul>
+		</li>
+		<li id="flow"><a href="../adm/admflowlist.html">承認フロー管理</a></li>
+		<li id="dept"><a href="../admin/deptlist.html">部門情報管理</a></li>
+		<li id="admin">
+			<a href="../admin/settingregist.html">設定管理</a>
+			<ul>
+				<li id="settingregist"><a href="../admin/settingregist.html">承認設定管理</a></li>
+				<li id="userlist"><a href="../admin/userlist.html">ユーザ情報管理</a></li>
+				<li id="samplelist"><a href="../admin/samplelist.html">テンプレート管理</a></li>
+			</ul>
+		</li>
+		<li><a href="../j_spring_security_logout">ログアウト</a></li>
+	</ul>
+	</div>
+
+	<div id="content-wrap">
+
+		<div id="utility">
+
+			<ul id="nav-secondary">
+			<li><a href="/">マイページ</a></li>
+
+		<li id="ladm">
+			<a href="../adm/admlist.html">案件管理</a>
+			<ul>
+				<li id="ladmlist"><a href="../adm/admlist.html">案件情報閲覧</a></li>
+				<li id="ladmlist2"><a href="../adm/admlist2.html?flag=2">進行中案件閲覧</a></li>
+				<li id="ladmlist3"><a href="../adm/admlist3.html?flag=3">承認済み案件閲覧</a></li>
+			</ul>
+		</li>
+		<li>
+			<a href="../adm/admdolist.html">承認管理</a>
+			<ul>
+				<li id="ladmdo"><a href="../adm/admdolist.html">承認情報閲覧</a></li>
+				<li id="ladmdoing"><a href="../adm/admdoinglist.html">進行中承認閲覧</a></li>
+				<li id="ladmcomplete"><a href="../adm/admcompletedolist.html">承認済み承認閲覧</a></li>
+			</ul>
+		</li>
+		<li id="lflow"><a href="../adm/admflowlist.html">承認フロー管理</a></li>
+		<li id="ldept"><a href="../admin/deptlist.html">部門情報管理</a></li>
+		<li id="ladmin">
+			<a href="../admin/settingregist.html">設定管理</a>
+			<ul>
+				<li id="lsettingregist"><a href="../admin/settingregist.html">承認設定管理</a></li>
+				<li id="luserlist"><a href="../admin/userlist.html">ユーザ情報管理</a></li>
+				<li id="lsamplelist"><a href="../admin/samplelist.html">テンプレート管理</a></li>
+			</ul>
+		</li>
+			</ul>
+		</div>
+<script>
+$(function(){
+	var path = window.location.pathname.split("/");
+	 if(path[3].indexOf("admlist.html")>=0) {
+	 	$('#adm').addClass("active");
+	 	$('#admlist').addClass("active");
+	 	$('#ladmlist').addClass("active");
+	 } else if(path[3].indexOf("admlist2.html")>=0) {
+		 $('#adm').addClass("active");
+		 $('#admlist2').addClass("active");
+		 $('#ladmlist2').addClass("active");
+	 } else if(path[3].indexOf("admlist3.html")>=0) {
+		 $('#adm').addClass("active");
+		 $('#admlist3').addClass("active");
+		 $('#ladmlist3').addClass("active");
+	 } else if(path[3].indexOf("admdolist.html")>=0) {
+		 $('#do').addClass("active");
+		 $('#admdo').addClass("active");
+		 $('#ladmdo').addClass("active");
+	 } else if(path[3].indexOf("admdoinglist.html")>=0) {
+		 $('#do').addClass("active");
+		 $('#admdoing').addClass("active");
+		 $('#ladmdoing').addClass("active");
+	 } else if(path[3].indexOf("admcompletedolist.html")>=0) {
+		 $('#do').addClass("active");
+		 $('#admcomplete').addClass("active");
+		 $('#ladmcomplete').addClass("active");
+	 } else if(path[3].indexOf("admflowlist.html")>=0) {
+		 $('#flow').addClass("active");
+		 $('#lflow').addClass("active");
+	 } else if(path[3].indexOf("deptlist.html")>=0) {
+		 $('#dept').addClass("active");
+		 $('#ldept').addClass("active");
+	 } else if(path[3].indexOf("userlist.html")>=0) {
+		 $('#admin').addClass("active");
+		 $('#userlist').addClass("active");
+		 $('#luserlist').addClass("active");
+	 } else if(path[3].indexOf("settingregist.html")>=0) {
+		 $('#admin').addClass("active");
+		 $('#settingregist').addClass("active");
+		 $('#lsettingregist').addClass("active");
+	 } else if(path[3].indexOf("samplelist.html")>=0) {
+		 $('#admin').addClass("active");
+		 $('#samlelist').addClass("active");
+		 $('#lsamplelist').addClass("active");
+	 }
+
+});
+</script>

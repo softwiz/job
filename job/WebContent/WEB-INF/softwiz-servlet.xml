@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+
+ 	<mvc:annotation-driven/>
+
+	<context:component-scan base-package="jp.co.softwiz" />
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>WEB-INF/properties/jdbc.properties</value>
+				<value>WEB-INF/properties/templates.properties</value>
+				<value>classpath:jp/co/softwiz/main/mapper/db.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>WEB-INF/properties/messages_ja</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="configSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>WEB-INF/properties/config</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="exceptionMapping" class="jp.co.softwiz.main.common.error.PreludebExceptionResolver"></bean>
+
+
+	<bean id="dataSource-postgres" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${postgres.jdbc.driverClass}"/>
+		<property name="url" value="${postgres.jdbc.url}"/>
+		<property name="username" value="${postgres.jdbc.username}"/>
+		<property name="password" value="${postgres.jdbc.password}"/>
+		<property name="maxActive" value="${postgres.jdbc.maxactive}"/>
+	</bean>
+
+	<bean id="dataSource-mssql" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${mssql.jdbc.driverClass}"/>
+		<property name="url" value="${mssql.jdbc.url}"/>
+		<property name="username" value="${mssql.jdbc.username}"/>
+		<property name="password" value="${mssql.jdbc.password}"/>
+		<property name="maxActive" value="${mssql.jdbc.maxactive}"/>
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource-${default.dbname}"/>
+		<property name="mapperLocations" value="classpath:jp/co/softwiz/main/mapper/*/*.xml"/>
+	</bean>
+
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"/>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource-${default.dbname}"/>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="velocityConfigurer"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="${templates.defaultpath}" />
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">UTF-8</prop>
+				<prop key="output.encoding">UTF-8</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="suffix" value="${templates.file.extension}" />
+		<property name="toolboxConfigLocation" value="${velocity.toolboxConfigLocation}"/>
+		<property name="cache" value="${velocity.cache}" />
+		<property name="exposeSpringMacroHelpers">
+			<value>true</value>
+		</property>
+		<property name="exposeRequestAttributes">
+			<value>true</value>
+		</property>
+		<property name="exposeSessionAttributes">
+			<value>true</value>
+		</property>
+		<property name="contentType" value="text/html; charset=UTF-8" />
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize">
+			<value>10000000</value>
+		</property>
+	</bean>
+
+</beans>
+

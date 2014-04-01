@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="../common/css/login-form.css" media="screen">
+        <style>body{background:center;margin: 0 auto;width: 960px;padding-top: 50px}.footer{margin-top:50px;text-align:center;color:#666;font:bold 14px Arial}.footer a{color:#999;text-decoration:none}.login-form{margin: 50px auto;}</style>
+    </head>
+    <body>
+        <div class="container">
+			<div class="login-form">
+				<h1>Login Form</h1>
+				<form id="f" name="f" action="../j_spring_security_check" method="POST">
+					<input type="text" name="j_username" placeholder="username">
+					<input type="password" name="j_password" placeholder="password">
+					<span>
+						<input type="checkbox" name="checkbox">
+						<label for="checkbox">remember</label>
+					</span>
+					<input type="submit" value="login">
+				</form>
+			</div>
+        </div>
+    </body>
+</html>
