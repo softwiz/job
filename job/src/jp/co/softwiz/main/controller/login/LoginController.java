@@ -11,7 +11,9 @@
 
 package jp.co.softwiz.main.controller.login;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import jp.co.softwiz.main.common.constants.CommonConst;
@@ -39,9 +41,24 @@ import org.springframework.web.util.WebUtils;
 @Controller
 public class LoginController {
 
+
 	private static final Logger		logger	= Logger.getLogger(LoginController.class);
 	//ログインサービス(DI)
 	@Autowired private LoginServiceInterface	loginService;
+	ModelAndView view = null;
+
+	static final String REQUEST_PARAM_NAME = "_remember_username";
+
+	static final String COOKIE_NAME = "saved_username";
+
+	static final int DEFAULT_MAX_AGE = 60*60*24*7;
+
+	private int maxAge = DEFAULT_MAX_AGE;
+
+
+	public void setMaxAge(int maxAge) {
+		this.maxAge = maxAge;
+	}
 
 	/**
 	 * ログイン画面初期
@@ -54,7 +71,7 @@ public class LoginController {
 		/********************************************************************************/
 		/* ModelAndView 生成 */
 		/********************************************************************************/
-        ModelAndView view = new ModelAndView(ModelConstants.PAGE_MODEL_LOGIN);
+        view = new ModelAndView(ModelConstants.PAGE_MODEL_LOGIN);
 
         LoginBean loginSession = CommonUtil.getLoginSession(request);
 		if(loginSession != null) {
@@ -73,26 +90,24 @@ public class LoginController {
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value = ModelConstants.REQ_MAPPING_LOGIN_PROCESS, method = RequestMethod.GET)
-	public ModelAndView doLoginProcess(@Valid LoginBean cmd, BindingResult result,
-								HttpServletRequest request, LoginBean loginBean) {
-		/********************************************************************************/
-		/* DEBUG 開始 */
-		/********************************************************************************/
-		logger.debug("LoginController - log START");
+	public ModelAndView doLoginProcess(HttpServletRequest request, HttpServletResponse response,
+											@Valid LoginBean cmd, BindingResult result, LoginBean loginBean) {
 
 		/********************************************************************************/
 		/* ModelAndView 生成 */
 		/********************************************************************************/
-		ModelAndView view = new ModelAndView(ModelConstants.PAGE_MODEL_LOGIN);
+		view = new ModelAndView();
+		view.setViewName(ModelConstants.PAGE_MODEL_LOGIN);
 
 		if (result.hasErrors()) {
 			view.addObject("errFlg", "1");
 			return view;
 		}
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-		loginBean.setUserId(userId);
+		loginBean.setUserid(userId);
 
 		loginService.setLoginBean(loginBean);
+		this.setUserIdOnCookie(request, response, loginBean);
 
 		//ログインサービス実行
 
@@ -107,10 +122,6 @@ public class LoginController {
 			logger.debug("LOGIN ID PASSWORD ERROR");
 			view.addObject("errFlg", "1");
 		}
-        /********************************************************************************/
-		/* DEBUG 終了 */
-		/********************************************************************************/
-		logger.debug("LoginController - log END ");
 
         return view;
 
@@ -135,6 +146,22 @@ public class LoginController {
     }
 
 
+	private void setUserIdOnCookie(HttpServletRequest request, HttpServletResponse response, LoginBean bean)
+		 {
 
+	  String remember = request.getParameter(REQUEST_PARAM_NAME);
+
+	  if (remember != null) {
+	   String username = bean.getUserid();
+	   Cookie cookie = new Cookie(COOKIE_NAME, username);
+	   cookie.setMaxAge(maxAge);
+	   response.addCookie(cookie);
+	  } else {
+	   Cookie cookie = new Cookie(COOKIE_NAME, "");
+	   cookie.setMaxAge(0);
+	   response.addCookie(cookie);
+	  }
+
+	 }
 
 }

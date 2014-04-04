@@ -971,7 +971,7 @@ public class CommonUtil{
 		LoginBean login = (LoginBean) WebUtils.getSessionAttribute(request, CommonConst.LOGIN_USER_KEY);
 		StringBuffer userId = new StringBuffer();
 		if (login != null)
-			userId.append(login.getUserId());
+			userId.append(login.getUserid());
 		return userId.toString();
 	}
 

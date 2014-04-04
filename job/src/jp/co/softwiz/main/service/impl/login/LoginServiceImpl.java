@@ -64,8 +64,8 @@ public class LoginServiceImpl implements LoginServiceInterface {
 		if(bean != null) {
 
 			bean.setLoginDiv("0"); //login
-			bean.setSessionId(request.getSession().getId());
-			bean.setConnectIp(CommonUtil.getUserAddress(request));
+			bean.setSessionid(request.getSession().getId());
+			bean.setConnectip(CommonUtil.getUserAddress(request));
 			//ログイン情報登録
 			int result = loginDao.updateLoginInfo(bean);
 			if(result <= 0) {

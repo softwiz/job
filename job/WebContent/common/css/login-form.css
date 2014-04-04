@@ -27,7 +27,7 @@ http://rockablethemes.com
 .login-form {
 	position: relative;
 	width: 200px;
-	height: 200px;
+	height: 230px;
 	padding: 15px 25px 0 25px;
 	margin-top: 15px;
 	cursor: default;
@@ -203,7 +203,7 @@ http://rockablethemes.com
 	position: absolute;
 	top: 1px;
 	left: 25px;
-	font-family: sans-serif;
+	font-family: 'Myriad Pro', sans-serif;
 	font-weight: bold;
 	font-size: 12px;
 	color: #e4e4e4;

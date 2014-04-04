@@ -2,7 +2,7 @@ package jp.co.softwiz.main.domain;
 
 /* Code Generator Information.
  * generator Version 1.0.0 release 2007/10/10
- * generated Date Tue Nov 12 15:32:08 JST 2013
+ * generated Date Wed Apr 02 13:34:14 JST 2014
  */
 import java.io.Serializable;
 
@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @version 1.0 
  * history 
  * Symbol	Date		Person		Note
- * [1]		2013/11/12	gtc-yun		Generated.
+ * [1]		2014/04/02	gtc-yun		Generated.
  */
 public class T_login_histVo implements Serializable{
 
@@ -24,9 +24,19 @@ public class T_login_histVo implements Serializable{
 	private int loginno;
 
 	/**
+	 * siteid:bpchar(3)
+	 */
+	private String siteid;
+
+	/**
 	 * userid:varchar(20)
 	 */
 	private String userid;
+
+	/**
+	 * roles:varchar(100)
+	 */
+	private String roles;
 
 	/**
 	 * yearmonthday:varchar(8)
@@ -75,9 +85,17 @@ public class T_login_histVo implements Serializable{
 
 	public void setLoginno(int loginno){ this.loginno = loginno; }
 
+	public String getSiteid(){ return this.siteid; }
+
+	public void setSiteid(String siteid){ this.siteid = siteid; }
+
 	public String getUserid(){ return this.userid; }
 
 	public void setUserid(String userid){ this.userid = userid; }
+
+	public String getRoles(){ return this.roles; }
+
+	public void setRoles(String roles){ this.roles = roles; }
 
 	public String getYearmonthday(){ return this.yearmonthday; }
 
@@ -108,8 +126,12 @@ public class T_login_histVo implements Serializable{
 		buffer.append("[T_login_histVo:");
 		buffer.append(" loginno: ");
 		buffer.append(loginno);
+		buffer.append(" siteid: ");
+		buffer.append(siteid);
 		buffer.append(" userid: ");
 		buffer.append(userid);
+		buffer.append(" roles: ");
+		buffer.append(roles);
 		buffer.append(" yearmonthday: ");
 		buffer.append(yearmonthday);
 		buffer.append(" logindiv: ");

@@ -89,6 +89,9 @@ public class CommonConst {
 	public static final String STRING_PATTERN_YYYY_MM_D						= "\\d{4}/\\d{2}/\\d{1}";
 	public static final String STRING_PATTERN_YYYY_MM_DD					= "\\d{4}/\\d{2}/\\d{2}";
 
+	/****** 共通パラメータ ******/
+	public static final String STRING_PARAMETER_LOCALES						= "locale";
+
 	/****** 共通ページリング ******/
 	public static final String STRING_URL_LOGIN								= "redirect:../login/login.html";
 

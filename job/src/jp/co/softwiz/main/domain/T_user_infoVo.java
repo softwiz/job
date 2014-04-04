@@ -2,21 +2,26 @@ package jp.co.softwiz.main.domain;
 
 /* Code Generator Information.
  * generator Version 1.0.0 release 2007/10/10
- * generated Date Tue Nov 12 15:32:10 JST 2013
+ * generated Date Wed Apr 02 13:34:15 JST 2014
  */
 import java.io.Serializable;
 
 /**
  * T_user_infoVo.
  * @author gtc-yun
- * @version 1.0
- * history
+ * @version 1.0 
+ * history 
  * Symbol	Date		Person		Note
- * [1]		2013/11/12	gtc-yun		Generated.
+ * [1]		2014/04/02	gtc-yun		Generated.
  */
 public class T_user_infoVo implements Serializable{
 
 	public static final String TABLE = "T_USER_INFO";
+
+	/**
+	 * siteid:bpchar(3) <Primary Key>
+	 */
+	private String siteid;
 
 	/**
 	 * usercode:varchar(50) <Primary Key>
@@ -78,7 +83,6 @@ public class T_user_infoVo implements Serializable{
 	 */
 	private String etcdesc;
 
-	private String apprimageurl;
 	/**
 	 * createdate:timestamp(29,6)
 	 */
@@ -115,17 +119,28 @@ public class T_user_infoVo implements Serializable{
 	private String deleteuser;
 
 	/**
+	 * apprimageurl:varchar(200)
+	 */
+	private String apprimageurl;
+
+	/**
 	* Constractor
 	*/
 	public T_user_infoVo(){}
 
 	/**
 	* Constractor
+	* @param <code>siteid</code>
 	* @param <code>usercode</code>
 	*/
-	public T_user_infoVo(String usercode){
+	public T_user_infoVo(String siteid, String usercode){
+		this.siteid = siteid;
 		this.usercode = usercode;
 	}
+
+	public String getSiteid(){ return this.siteid; }
+
+	public void setSiteid(String siteid){ this.siteid = siteid; }
 
 	public String getUsercode(){ return this.usercode; }
 
@@ -203,19 +218,15 @@ public class T_user_infoVo implements Serializable{
 
 	public void setDeleteuser(String deleteuser){ this.deleteuser = deleteuser; }
 
+	public String getApprimageurl(){ return this.apprimageurl; }
 
-
-	public String getApprimageurl() {
-		return apprimageurl;
-	}
-
-	public void setApprimageurl(String apprimageurl) {
-		this.apprimageurl = apprimageurl;
-	}
+	public void setApprimageurl(String apprimageurl){ this.apprimageurl = apprimageurl; }
 
 	public String toString(){
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("[T_user_infoVo:");
+		buffer.append(" siteid: ");
+		buffer.append(siteid);
 		buffer.append(" usercode: ");
 		buffer.append(usercode);
 		buffer.append(" username: ");
@@ -254,6 +265,8 @@ public class T_user_infoVo implements Serializable{
 		buffer.append(deletedate);
 		buffer.append(" deleteuser: ");
 		buffer.append(deleteuser);
+		buffer.append(" apprimageurl: ");
+		buffer.append(apprimageurl);
 		buffer.append("]");
 		return buffer.toString();
 	}

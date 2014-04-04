@@ -1,12 +1,15 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/properties/messages_en.properties=UTF-8
+encoding//WebContent/WEB-INF/view/admin/category.vm=UTF-8
+encoding//WebContent/WEB-INF/view/admin/categoryview.vm=UTF-8
 encoding//WebContent/WEB-INF/view/admin/samplelist.vm=UTF-8
 encoding//WebContent/WEB-INF/view/admin/sampleregist.vm=UTF-8
 encoding//WebContent/WEB-INF/view/admin/sampleview.vm=UTF-8
 encoding//WebContent/WEB-INF/view/admin/settingregist.vm=UTF-8
 encoding//WebContent/WEB-INF/view/admin/userlist.vm=UTF-8
-encoding//WebContent/WEB-INF/view/admin/userregist.vm=UTF-8
 encoding//WebContent/WEB-INF/view/common/bottom.vm=UTF-8
 encoding//WebContent/WEB-INF/view/common/header.vm=UTF-8
+encoding//WebContent/WEB-INF/view/error/error.vm=UTF-8
 encoding//WebContent/WEB-INF/view/mypage/main.vm=UTF-8
 encoding//src/jp/co/focus/workflow/main/mapper/workflow.ddl=MS932
-encoding//src/jp/co/softwiz/main/mapper/workflow.ddl=MS932
+encoding//src/jp/co/softwiz/main/mapper/job.ddl=MS932

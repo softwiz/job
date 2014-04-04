@@ -10,7 +10,7 @@
 */
 
 package jp.co.softwiz.main.domain.login;
-import java.util.Date;
+import jp.co.softwiz.main.domain.T_login_infoVo;
 
 
 /**
@@ -18,52 +18,19 @@ import java.util.Date;
  * @version
  *
  */
-public class LoginBean {
+public class LoginBean extends T_login_infoVo {
 
-	private String userId;
-	private String userCode;
 	private String userName;
-	private String roles;
-	private String password;
 	private String loginDiv;
-	private String sessionId;
-	private String connectIp;
-	private Date connectDate;
-	private String connectDay;
 	private String menuTree;
+	private String locale;
 
-
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	public String getUserCode() {
-		return userCode;
-	}
-	public void setUserCode(String userCode) {
-		this.userCode = userCode;
-	}
 
 	public String getUserName() {
 		return userName;
 	}
-
-	public String getRoles() {
-		return roles;
-	}
-	public void setRoles(String roles) {
-		this.roles = roles;
-	}
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
 	}
 	public String getLoginDiv() {
 		return loginDiv;
@@ -71,36 +38,20 @@ public class LoginBean {
 	public void setLoginDiv(String loginDiv) {
 		this.loginDiv = loginDiv;
 	}
-	public String getSessionId() {
-		return sessionId;
-	}
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
-	}
-	public String getConnectIp() {
-		return connectIp;
-	}
-	public void setConnectIp(String connectIp) {
-		this.connectIp = connectIp;
-	}
-	public Date getConnectDate() {
-		return connectDate;
-	}
-	public void setConnectDate(Date connectDate) {
-		this.connectDate = connectDate;
-	}
-	public String getConnectDay() {
-		return connectDay;
-	}
-	public void setConnectDay(String connectDay) {
-		this.connectDay = connectDay;
-	}
 	public String getMenuTree() {
 		return menuTree;
 	}
 	public void setMenuTree(String menuTree) {
 		this.menuTree = menuTree;
 	}
+	public String getLocale() {
+		return locale;
+	}
+	public void setLocale(String locale) {
+		this.locale = locale;
+	}
+
+
 
 
 }

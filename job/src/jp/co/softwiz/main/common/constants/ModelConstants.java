@@ -36,13 +36,22 @@ public class ModelConstants {
 	/****************************
 	 * マッピング　セット用
 	 ****************************/
-	/** ログイン **/
+	//ログイン
 	public static final String REQ_MAPPING_LOGIN 									= "/login/login";
 	public static final String REQ_MAPPING_LOGOUT 									= "/login/logout";
 	public static final String REQ_MAPPING_LOGIN_PROCESS 							= "/login/loginProcess";
 	public static final String REQ_MAPPING_PASSWORD 								= "/password/password";
 	public static final String REQ_MAPPING_PASSWORD_PROCESS 						= "/password/passwordProcess";
 	public static final String REQ_MAPPING_MAIN										= "/mypage/main";
+
+	//カテゴリ情報
+	public static final String REQ_MAPPING_CATEGORY 								= "/admin/category";
+	public static final String REQ_MAPPING_CATEGORY_VIEW							= "/admin/categoryview";
+	public static final String REQ_MAPPING_CATE_MAIN_UPDATE 						= "/admin/categoryUpdate";
+	public static final String REQ_MAPPING_GET_CATE_SUB_LIST 						= "/admin/categorySub";
+	public static final String REQ_MAPPING_CATE_SUB_VIEW 							= "/admin/categorySubView";
+	public static final String REQ_MAPPING_CATE_SUB_UPDATE 							= "/admin/categorySubUpdate";
+	public static final String REQ_MAPPING_CATE_SUB_DELETE 							= "/admin/categorySubDelete";
 
 	/****************************
 	 * ページVIEWネームセット用
@@ -55,6 +64,11 @@ public class ModelConstants {
 
 	/** エラー画面 **/
 	public static final String PAGE_MODEL_ERROR										= "/error/error";
+
+	//カテゴリ情報
+	public static final String PAGE_MODEL_CATEGORY_MAIN 							= "/admin/category";
+	public static final String PAGE_MODEL_CATEGORY_VIEW 							= "/admin/categoryview";
+	public static final String PAGE_MODEL_CATEGORY_SUB 								= "/admin/categorySub";
 
 	/****************************
 	 * Redirect Login

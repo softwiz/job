@@ -2,7 +2,7 @@ package jp.co.softwiz.main.domain;
 
 /* Code Generator Information.
  * generator Version 1.0.0 release 2007/10/10
- * generated Date Tue Nov 12 15:32:08 JST 2013
+ * generated Date Wed Apr 02 13:34:14 JST 2014
  */
 import java.io.Serializable;
 
@@ -12,11 +12,16 @@ import java.io.Serializable;
  * @version 1.0 
  * history 
  * Symbol	Date		Person		Note
- * [1]		2013/11/12	gtc-yun		Generated.
+ * [1]		2014/04/02	gtc-yun		Generated.
  */
 public class T_login_infoVo implements Serializable{
 
 	public static final String TABLE = "T_LOGIN_INFO";
+
+	/**
+	 * siteid:bpchar(3) <Primary Key>
+	 */
+	private String siteid;
 
 	/**
 	 * userid:varchar(20) <Primary Key>
@@ -24,9 +29,19 @@ public class T_login_infoVo implements Serializable{
 	private String userid;
 
 	/**
-	 * password:varchar(20)
+	 * password:varchar(200)
 	 */
 	private String password;
+
+	/**
+	 * usercode:varchar(50)
+	 */
+	private String usercode;
+
+	/**
+	 * roles:varchar(100)
+	 */
+	private String roles;
 
 	/**
 	 * userregday:varchar(8)
@@ -90,11 +105,17 @@ public class T_login_infoVo implements Serializable{
 
 	/**
 	* Constractor
+	* @param <code>siteid</code>
 	* @param <code>userid</code>
 	*/
-	public T_login_infoVo(String userid){
+	public T_login_infoVo(String siteid, String userid){
+		this.siteid = siteid;
 		this.userid = userid;
 	}
+
+	public String getSiteid(){ return this.siteid; }
+
+	public void setSiteid(String siteid){ this.siteid = siteid; }
 
 	public String getUserid(){ return this.userid; }
 
@@ -103,6 +124,14 @@ public class T_login_infoVo implements Serializable{
 	public String getPassword(){ return this.password; }
 
 	public void setPassword(String password){ this.password = password; }
+
+	public String getUsercode(){ return this.usercode; }
+
+	public void setUsercode(String usercode){ this.usercode = usercode; }
+
+	public String getRoles(){ return this.roles; }
+
+	public void setRoles(String roles){ this.roles = roles; }
 
 	public String getUserregday(){ return this.userregday; }
 
@@ -151,10 +180,16 @@ public class T_login_infoVo implements Serializable{
 	public String toString(){
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("[T_login_infoVo:");
+		buffer.append(" siteid: ");
+		buffer.append(siteid);
 		buffer.append(" userid: ");
 		buffer.append(userid);
 		buffer.append(" password: ");
 		buffer.append(password);
+		buffer.append(" usercode: ");
+		buffer.append(usercode);
+		buffer.append(" roles: ");
+		buffer.append(roles);
 		buffer.append(" userregday: ");
 		buffer.append(userregday);
 		buffer.append(" sessionid: ");

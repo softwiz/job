@@ -15,14 +15,20 @@ public class LoggingAspect {
 
 	@Before("execution(* jp.co.softwiz.main.controller..*(..))")
     public void logBefore(JoinPoint joinPoint) {
-		logger.debug(joinPoint.getSignature().getName() + "--- Controller START");
+		String packageName = joinPoint.getSignature().getDeclaringTypeName();
+		String methodName = joinPoint.getSignature().getName();
+
+		logger.info(new StringBuilder(packageName).append("-").append(methodName) + "--- Controller START");
 
     }
 
 	@After("execution(public * jp.co.softwiz.main.controller..*(..))")
     public void logAfter(JoinPoint joinPoint) {
 
-		logger.debug(joinPoint.getSignature().getName() + "--- Controller END");
+		String packageName = joinPoint.getSignature().getDeclaringTypeName();
+		String methodName = joinPoint.getSignature().getName();
+
+		logger.info(new StringBuilder(packageName).append("-").append(methodName) + "--- Controller END");
 
     }
 

@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:p="http://www.springframework.org/schema/p"
     xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
 
  	<mvc:annotation-driven/>
+	<aop:aspectj-autoproxy/>
+	<bean class="jp.co.softwiz.main.common.util.LoggingAspect" id="logAspect"></bean>
+	<bean class="jp.co.softwiz.main.common.util.LoginCheckAspect" id="loginAspect"></bean>
 
 	<context:component-scan base-package="jp.co.softwiz" />
+
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -30,12 +37,20 @@
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8"/>
 		<property name="basenames">
-			<list>
-				<value>WEB-INF/properties/messages_ja</value>
-			</list>
-		</property>
+	         <list>
+	          <value>WEB-INF/properties/messages</value>
+	         </list>
+     	</property>
+     	<property name="fallbackToSystemLocale" value="false"/>
+     	<property name="cacheSeconds" value="5"/>
 	</bean>
+
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+	     <property name="defaultLocale" value="ja" />
+	</bean>
+
 
 	<bean id="configSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
@@ -81,6 +96,7 @@
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
+
 	<bean id="velocityConfigurer"
 		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
 		<property name="resourceLoaderPath" value="${templates.defaultpath}" />
@@ -115,6 +131,9 @@
 			<value>10000000</value>
 		</property>
 	</bean>
+
+
+
 
 </beans>
 

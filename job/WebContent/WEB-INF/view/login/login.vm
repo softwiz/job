@@ -2,20 +2,27 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="../common/css/login-form.css" media="screen">
+        <script type="text/javascript" src="../common/js/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="../common/js/commonUtil.js"></script>
         <style>body{background:center;margin: 0 auto;width: 960px;padding-top: 50px}.footer{margin-top:50px;text-align:center;color:#666;font:bold 14px Arial}.footer a{color:#999;text-decoration:none}.login-form{margin: 50px auto;}</style>
     </head>
     <body>
-        <div class="container">
-			<div class="login-form">
-				<h1>Login Form</h1>
+    	<div class="container">
+    		<div class="login-form">
+				<a href="./login.html?locale=en"><img src="../imgs/contry/United States Flag.ico" border="0" width="30" height="30"></a>
+		    	<a href="./login.html?locale=ja"><img src="../imgs/contry/Japan Flag.ico" border="0" width="30" height="30"></a>
+		    	<a href="./login.html?locale=ko"><img src="../imgs/contry/Korea Flag.ico" border="0" width="30" height="30"></a>
+		    	<a href="./login.html?locale=zh"><img src="../imgs/contry/China Flag.ico" border="0" width="30" height="30"></a>
+				<h1>#springMessage("login.title.form")</h1>
 				<form id="f" name="f" action="../j_spring_security_check" method="POST">
-					<input type="text" name="j_username" placeholder="username">
-					<input type="password" name="j_password" placeholder="password">
+					<input type="hidden" name="siteid" value="001">
+					<input type="text" id="j_username" name="j_username" placeholder='#springMessage("login.label.username")'>
+					<input type="password" name="j_password" placeholder='#springMessage("login.label.password")'>
 					<span>
-						<input type="checkbox" name="checkbox">
-						<label for="checkbox">remember</label>
+						<input type="checkbox" id="j_remember" name="_spring_security_remember_me" value="true	"/>
+						<label for="checkbox">#springMessage("login.button.remember")</label>
 					</span>
-					<input type="submit" value="login">
+					<input type="submit" value='#springMessage("login.button.login")'>
 				</form>
 			</div>
         </div>
