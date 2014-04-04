@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><title>job - 404</title>
+<link href="../common/css/error.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="../imgs/favicon.ico"/>
+</head>
+<body>
+<div class="figure">
+<img src="../imgs/psychobox.png" alt="Error:"/>
+</div>
+<div id="errorbox">
+<h1>エラー</h1>エラーが発生されました。。ヘルプが必要な場合は、<a href="./html/help">ヘルプセンター</a>をご覧になるか
+<a href="./../mypage/main.html">ホーム</a>に戻ってください。<br>
+exception : $!{exception}<br>
+exceptionMessage : $!{exceptionMessage}
+</div>
+
+</body>
+</html>

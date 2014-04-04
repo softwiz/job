@@ -1,0 +1,77 @@
+﻿#parse ("common/header.vm")
+<div id="content">
+
+	<div id="breadcrumb">
+	<a href="../mypage/main.html">Home</a> / 管理ページ / <strong>カテゴリ情報</strong></div>
+<h1>
+◎カテゴリ情報
+</h1>
+<form id="f" name="f" action="../admin/category.html" method="POST" class="f-wrap-2">
+<fieldset>
+	<label for="searchUsercode"><b>大分類コード:</b>
+		<input id="searchMaincode" name="searchMaincode" type="text" maxlength="255" value="$!{info.searchMaincode}"/>
+	</label>
+	<label for="searchUsername"><b>大分類名:</b>
+		<input id="searchMainname" name="searchMainname" type="text" maxlength="255" value="$!{info.searchMainname}"/>
+		<input id="btnSearch" class="f-submit" type="submit" name="btnSearch" value="検索" onclick="goSearchForm();"/>
+	</label>
+</fieldset>
+</form>
+<br>
+<div style="height:30px;text-align:right;">
+	Total Count : $!{list.size()}&nbsp;<input type="button" value="カテゴリ新規作成" onclick="window.location('../admin/categoryregist.html');">
+</div>
+<div height="800px">
+<table class="table1">
+    <thead>
+        <tr>
+            <th>大分類コード</th>
+            <th>大分類名</th>
+            <th>使用区分</th>
+            <th>サブ数</th>
+            <th>備考</th>
+            <th>生成日</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    	#foreach($bean in $!list)
+        <tr>
+            <td>$!bean.maincode</td>
+            <td>$!bean.mainname</td>
+            <td><select id="usediv" name="usediv">
+				<option value="$!bean.maincode/Y" #if($!bean.usediv=="Y")selected #end>使用中</option>
+				<option value="$!bean.maincode/N" #if($!bean.usediv=="N")selected #end>中止</option>
+			</select></td>
+            <td>$!bean.subnum</td>
+            <td>$!bean.etcdesc</td>
+            <td>$!bean.createday</td>
+            <td><input type="button" value="表示" onclick="viewCateSub('$!bean.maincode');">
+            	<input type="button" value="修正" onclick="goUpdateForm('$!bean.maincode')">
+            	<input type="button" value="削除" onclick="goDeleteForm('$!bean.maincode')">
+            </td>
+        </tr>
+        #end
+		#if("$!userList.size()" == "0" || "$!userList"=="")
+		<tr id="tablecontents" align="center">
+			<td colspan="7"><b>#springMessage("common.info.notResultList")</b></td>
+		</tr>
+		#end
+    </tbody>
+</table>
+</div>
+<script>
+function goUpdateForm(code) {
+	$('#maincode').val(code);
+	$('#f').attr('action', '../admin/categoryregist.html');
+	$('#f').submit();
+}
+
+function goDeleteForm(code) {
+	$('#maincode').val(code);
+	$('#f').attr('action', '../admin/categorydelete.html');
+	$('#f').submit();
+}
+
+</script>
+#parse ("common/bottom.vm")

@@ -1,0 +1,149 @@
+#parse ("common/header.vm")
+<div id="content">
+
+	<div id="breadcrumb">
+	<a href="../mypage/main.html">Home</a> / ユーザ管理 / <strong>ユーザ登録</strong></div>
+<h1>◎ユーザ登録</h1>
+<div id="form_container">
+<form id="f"  name="f" method="post" action="../admin/userprocess.html" class="f-wrap-1">
+<input type="hidden" id="idcheck" name="idcheck" #if ("$!{info.userid}"!='')value="Y"#else value="Y"#end>
+<fieldset>
+<h3>基本情報</h3>
+	<label for="usercode"><b>ユーザコード:</b>
+		<input class="disabledtext" id="usercode" name="usercode" type="text" maxlength="255" value="$!{info.usercode}" readonly/>
+	</label>
+	<label for="username"><b>ユーザ名:</b>
+			<input id="username" name="username" type="text" maxlength="255" value="$!{info.username}"/>
+	</label>
+	<label for="roles"><b>ユーザ名:</b>
+		<select id="roles" name="roles">
+			<option value="ROLE_USER" #if("$!{info.roles}"=="ROLE_USER")selected#end>一般ユーザ</option>
+			#if ("$login.roles"=="ROLE_SUPER")
+			<option value="ROLE_ADMIN" #if("$!{info.roles}"=="ROLE_ADMIN")selected#end>管理ユーザ</option>
+			<option value="ROLE_SUPER" #if("$!{info.roles}"=="ROLE_SUPER")selected#end>スーパユーザ</option>
+			#end
+		</select>
+	</label>
+</fieldset>
+<fieldset>
+<h3 class="highlight">ログイン情報</h3>
+		<label for="userid"><b>ログインID:</b>
+		<input id="userid" name="userid" type="text" maxlength="255" value="$!{info.userid}" />&nbsp;
+		<div id="resultDIV"><font color='red'>#if ("$!{info.userid}"=='')IDを入力してください。#end</font></div>
+	</label>
+	<label for="password"><b>パスワード:</b>
+			<input id="password" name="password" type="password" maxlength="255" value=""/>
+	</label>
+	<label for="passwordConfirm"><b>パスワード確認:</b>&nbsp;
+			<input id="passwordConfirm" name="passwordConfirm" type="password" maxlength="255" value=""/>
+			<div id=confirmDiv></div>
+	</label><br>
+	<div class="f-submit-wrap">
+		<input id="saveForm"  class="f-submit" type="submit" name="submit" value=" 登録 "/>&nbsp;
+		<input id="saveForm"  class="f-submit" type="button" name="cancel" value=" 取消 " onclick="history.back();"><br />
+	</div>
+</fieldset>
+<br>
+
+</form>
+</div>
+</section>
+<script>
+jQuery(function() {
+	$( "#f" ).validate({
+	  rules: {
+		  username: {
+	      required: true,
+	      minlength: 2, maxlength:80
+	    },
+	 	password: {
+	      required: true,
+	      minlength: 4, maxlength:30
+	    }
+	  },
+	  errorElement: "span",
+	    errorPlacement: function(error, element) {
+	        error.insertAfter(element);
+	        error.css("margin", "0 0 0 5px");
+	    },
+	submitHandler: function(form) {
+		if ($("#password").val()!=$("#passwordConfirm").val()) {
+			$("#confirmDiv").html("<font color='red'>パスワードとパスワード確認値が異なっています。</font>");
+			return false;
+		}
+		if ($("#idcheck").val()=="Y") {
+    		form.submit();
+			return true;
+		}
+		else return false;
+	  }
+
+	});
+
+	$('#userid').keyup(function(){
+		var param="../admin/useridcheck.html?userid=" + $('#userid').val();
+		var count = 0;
+		var myVal = $("#userid").val();
+        if (myVal.length<4||myVal.length>31) {
+        	$("#resultDIV").html("<font color='red'>4～31字の半角英数字にして下さい。</font>");
+        	$("#idcheck").val("N");
+            return false;
+        }
+        if (!myVal.match(/^[A-Za-z]\w+/)) {
+            $("#resultDIV").html("<font color='red'>最初の文字はアルファベットとしてください。</font>");
+            $("#idcheck").val("N");
+        	return false;
+        }
+	    $.getJSON(param,function(json){
+			$.each(json,function(i,item){
+				count++;
+				$("#resultDIV").html("<font color='red'>この ID は使用できません。</font>");
+				$("#idcheck").val("N");
+				return false;
+			});
+	   },"json");
+	    if(count==0) $("#resultDIV").html("<font color='blue'>この ID は使用可能です。</font>");
+	    $("#idcheck").val("Y");
+	    return false;
+
+	});
+
+
+
+});
+
+$('.select').select2();
+function setUserList() {
+   	   var param="../adm/admuserlist.html?deptcode=" + $('#deptcode').val();
+    	   select = document.getElementById('usercode');
+    	   $('select#usercode option').remove();
+    	   $('select#usercode option').refresh();
+    	   $.getJSON(param,function(json){
+   				$.each(json,function(i,item){
+   					var opt = document.createElement('option');
+   				    opt.value = item.usercode;
+   				    opt.innerHTML = item.usercode + "&nbsp;:&nbsp;" + item.username;
+   				    select.appendChild(opt);
+   				});
+    	   },"json");
+}
+
+function addNotice(){
+	 if ($('#usercode').val() == "" || $('#usercode').val() == null) {
+		 alert("ユーザを選択してください。");
+		 $("#message").text('#springMessage("adm.select.usercode.check")');
+		 return false;
+	 }
+	 var NowCntNodes=$("[id^='NoticeNode']").length;
+		 if(NowCntNodes<1){NowCntNodes=0;}
+	 var AddCntNodes=NowCntNodes+1; $('#innerData2').append('<div class="NoticeNode" id="NoticeNode_'+AddCntNodes+'"></div>');
+
+	 $('#NoticeNode_'+AddCntNodes).append('<input type="text" name="leNotice" style="width:500px" value="' + $('#usercode').val() + '" readonly />');
+	 $('#NoticeNode_'+AddCntNodes).append('&nbsp;<input type="button" value="削除" onclick="delNotice(\'NoticeNode_'+AddCntNodes+'\');">');
+	}
+
+	function delNotice(id){
+	  $("#"+id).remove();
+	}
+</script>
+#parse ("common/bottom.vm")
