@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry location="C:\Users\gtc-yun\.m2\repository\org\postgresql\postgresql\9.2-1002-jdbc4\postgresql-9.2-1002-jdbc4.jar" />
+
+	<context id="context1">
+		<jdbcConnection driverClass="org.postgresql.Driver"
+			connectionURL="jdbc:postgresql://localhost:5432/job" userId="postgres"
+			password="gunny21" />
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="true" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="jp.co.softwiz.main.domain"
+			targetProject="job" />
+
+		<sqlMapGenerator targetPackage="jp.co.softwiz.main.mapper"
+			targetProject="job" />
+
+		<table schema="" tableName="t_test_info" enableDeleteByExample="false" enableCountByExample="false"
+			enableUpdateByExample="false" selectByExampleQueryId="false"
+			enableSelectByExample="false" modelType="flat"/>
+	</context>
+</generatorConfiguration>

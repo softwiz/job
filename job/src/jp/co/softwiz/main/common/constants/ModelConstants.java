@@ -47,11 +47,19 @@ public class ModelConstants {
 	//カテゴリ情報
 	public static final String REQ_MAPPING_CATEGORY 								= "/admin/category";
 	public static final String REQ_MAPPING_CATEGORY_VIEW							= "/admin/categoryview";
+	public static final String REQ_MAPPING_CATEGORY_REGIST							= "/admin/categoryregist";
+	public static final String REQ_MAPPING_CATEGORY_DELETE 							= "/admin/categorydelete";
 	public static final String REQ_MAPPING_CATE_MAIN_UPDATE 						= "/admin/categoryUpdate";
 	public static final String REQ_MAPPING_GET_CATE_SUB_LIST 						= "/admin/categorySub";
 	public static final String REQ_MAPPING_CATE_SUB_VIEW 							= "/admin/categorySubView";
 	public static final String REQ_MAPPING_CATE_SUB_UPDATE 							= "/admin/categorySubUpdate";
 	public static final String REQ_MAPPING_CATE_SUB_DELETE 							= "/admin/categorySubDelete";
+
+	//テスト情報
+	public static final String REQ_MAPPING_TEST_LIST 								= "/test/testlist";
+	public static final String REQ_MAPPING_TEST_VIEW								= "/test/testview";
+	public static final String REQ_MAPPING_TEST_REGIST								= "/test/testregist";
+	public static final String REQ_MAPPING_TEST_DELETE 								= "/test/testdelete";
 
 	/****************************
 	 * ページVIEWネームセット用
@@ -69,6 +77,10 @@ public class ModelConstants {
 	public static final String PAGE_MODEL_CATEGORY_MAIN 							= "/admin/category";
 	public static final String PAGE_MODEL_CATEGORY_VIEW 							= "/admin/categoryview";
 	public static final String PAGE_MODEL_CATEGORY_SUB 								= "/admin/categorySub";
+
+	//テスト情報
+	public static final String PAGE_MODEL_TEST_LIST 								= "/test/testlist";
+	public static final String PAGE_MODEL_TEST_VIEW 								= "/test/testview";
 
 	/****************************
 	 * Redirect Login

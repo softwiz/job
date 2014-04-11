@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ibatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Apache iBATIS Ibator Configuration 1.0//EN" "http://ibatis.apache.org/dtd/ibator-config_1_0.dtd" >
+<ibatorConfiguration >
+  <classPathEntry location="C:\Users\gtc-yun\.m2\repository\org\postgresql\postgresql\9.2-1002-jdbc4\postgresql-9.2-1002-jdbc4.jar" />
+<!--
+  <ibatorContext id="CT_COMM_CD_DESC" >
+    <jdbcConnection driverClass="oracle.jdbc.OracleDriver" connectionURL="dburl" userId="user" password="pass" />
+    <javaModelGenerator targetPackage="database.model" targetProject="dwmsc" />
+    <sqlMapGenerator targetPackage="database.dao.sqlmap" targetProject="dwmsc" />
+    <daoGenerator targetPackage="database.dao" targetProject="dwmsc" type="GENERIC-CI" />
+    <table schema="ACNT" tableName="CT_COMM_CD_DESC" enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"/>
+  </ibatorContext>
+ -->
+  <ibatorContext id="AT_ACNT" >
+    <jdbcConnection driverClass="org.postgresql.Driver" connectionURL="jdbc:postgresql://localhost:5432/job" userId="postgres" password="gunny21" />
+    <javaModelGenerator targetPackage="database.model" targetProject="job">
+    	<property name="enableSubPackages" value="true" />
+    </javaModelGenerator>
+    <sqlMapGenerator targetPackage="database.mapper" targetProject="job">
+    	<property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+    <daoGenerator targetPackage="database.dao" targetProject="job" type="GENERIC-CI">
+    	<property name="enableSubPackages" value="true" />
+    </daoGenerator>
+
+    <table tableName="T_cate_main" enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"/>
+    <table tableName="T_cate_sub" enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"/>
+  </ibatorContext>
+</ibatorConfiguration>

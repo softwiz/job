@@ -14,6 +14,7 @@ package jp.co.softwiz.main.controller.admin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +29,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.RequestContextUtils;
+
+import com.google.gson.Gson;
 
 
 
@@ -53,7 +58,13 @@ public class CategoryController {
 		/********************************************************************************/
 		/* ModelAndView 生成 */
 		/********************************************************************************/
-        ModelAndView view = new ModelAndView(ModelConstants.PAGE_MODEL_CATEGORY_MAIN);
+		ModelAndView view = new ModelAndView(ModelConstants.PAGE_MODEL_CATEGORY_MAIN);
+
+		//属性情報取得
+		Map<String, ?> map = RequestContextUtils.getInputFlashMap(request);
+		if (map != null) {
+			bean = (CateMainBean) map.get("bean");
+		}
         view.addObject("list", categoryService.selectMasterList(bean));
         view.addObject("info", bean);
        return view;
@@ -64,7 +75,7 @@ public class CategoryController {
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value = ModelConstants.REQ_MAPPING_CATEGORY_VIEW, method = RequestMethod.POST)
-    public ModelAndView registPage(HttpServletRequest request, CateMainBean bean)
+    public ModelAndView categoryViewPage(HttpServletRequest request, CateMainBean bean)
     {
 		/********************************************************************************/
 		/* ModelAndView 生成 */
@@ -74,6 +85,50 @@ public class CategoryController {
         view.addObject("info", bean);
         view.addObject("bean", categoryService.selectMaster(bean));
         return view;
+    }
+
+	/** カテゴリ情報登録
+	 * @param
+	 * @return ModelAndView
+	 */
+	@RequestMapping(value = ModelConstants.REQ_MAPPING_CATEGORY_REGIST, method = RequestMethod.POST)
+    public ModelAndView categoryRegistPage(HttpServletRequest request, CateMainBean bean)
+    {
+		/********************************************************************************/
+		/* ModelAndView 生成 */
+		/********************************************************************************/
+		ModelAndView view = new ModelAndView("redirect:.." + ModelConstants.REQ_MAPPING_CATEGORY + ".html");
+
+		//属性情報保存
+		FlashMap fm = RequestContextUtils.getOutputFlashMap(request);
+		fm.put("bean", bean);
+
+		categoryService.registMaster(request, bean);
+
+		return view;
+
+    }
+
+	/** カテゴリ情報削除
+	 * @param
+	 * @return ModelAndView
+	 */
+	@RequestMapping(value = ModelConstants.REQ_MAPPING_CATEGORY_DELETE, method = RequestMethod.POST)
+    public ModelAndView categoryDeletePage(HttpServletRequest request, CateMainBean bean)
+    {
+		/********************************************************************************/
+		/* ModelAndView 生成 */
+		/********************************************************************************/
+		ModelAndView view = new ModelAndView("redirect:.." + ModelConstants.REQ_MAPPING_CATEGORY + ".html");
+
+		//属性情報保存
+		FlashMap fm = RequestContextUtils.getOutputFlashMap(request);
+		fm.put("bean", bean);
+
+		categoryService.deleteMaster(request, bean);
+
+		return view;
+
     }
 
 	/**
@@ -106,14 +161,15 @@ public class CategoryController {
 	 *
 	 */
 	@RequestMapping(value = ModelConstants.REQ_MAPPING_GET_CATE_SUB_LIST, method = RequestMethod.GET)
-	public void etCateSubList(HttpServletRequest request, HttpServletResponse response
+	public void getCateSubList(HttpServletRequest request, HttpServletResponse response
 											,CateMainBean bean) throws IOException {
 		List<CateSubBean> subList =  categoryService.selectDetailList(bean);
-		Gson gson = new Gson();
-		gson.toJson(subList);
+
+		response.setContentType( "application/json" );
+	    response.setCharacterEncoding( "UTF-8" );
 		response.setHeader("Cache-Control", "no-cache");
 		PrintWriter writer = response.getWriter();
-		writer.print(gson);
+		writer.print(new Gson().toJson( subList) );
 		writer.close();
 	}
 

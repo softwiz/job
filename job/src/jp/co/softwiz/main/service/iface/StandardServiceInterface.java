@@ -21,16 +21,14 @@ import javax.servlet.http.HttpServletRequest;
  * @param <T>
  *
  */
-public interface MasterDetailServiceInterface<M, D> {
+public interface StandardServiceInterface<T> {
 
 
-	public List<M> selectMasterList(M bean);
+	public List<T> selectList(T bean);
 
-	public M selectMaster(M bean);
+	public T select(T bean);
 
-	public List<D> selectDetailList(M bean);
+	public void regist(HttpServletRequest request, T bean);
 
-	public void registMaster(HttpServletRequest request, M bean);
-
-	public void deleteMaster(HttpServletRequest request, M bean);
+	public void delete(HttpServletRequest request, T bean);
 }

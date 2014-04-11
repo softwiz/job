@@ -1,8 +1,8 @@
 package jp.co.softwiz.main.domain.admin;
 
-import jp.co.softwiz.main.domain.T_cate_subVo;
+import jp.co.softwiz.main.domain.TCateSub;
 
-public class CateSubBean extends  T_cate_subVo{
+public class CateSubBean extends  TCateSub{
 	private String searchMainCode;	//検索条件：メインコード
 	private String searchMainName;	//検索条件：メイン名
 	private String mainName;		//メインコード

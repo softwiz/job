@@ -40,15 +40,16 @@
 	<!-- 中分類カテゴリ情報を取得する -->
 	<select id="selectDetailList" parameterType="jp.co.softwiz.main.domain.admin.CateMainBean"
 					resultType="jp.co.softwiz.main.domain.admin.CateSubBean" statementType="CALLABLE">
+
 		SELECT maincode, subcode, subname, subvalue, subvalue2, subvalue3, vieworder, usediv, etcdesc
-				,to_char(createDate, 'YYYY-MM-DD') as createDay, deleteflag
+				,to_char(createdate, 'YYYY-MM-DD') as createDay, deleteflag
 		  FROM t_cate_sub
-		 WHERE mainCode = #{mainCode}
+		 WHERE maincode = #{maincode}
 		ORDER BY vieworder
 	</select>
 
 	<!-- 中分類カテゴリ情報を取得する -->
-	<select id="getCateSub" parameterType="jp.co.softwiz.main.domain.admin.CateSubBean"
+	<select id="selectDetail" parameterType="jp.co.softwiz.main.domain.admin.CateSubBean"
 					resultType="jp.co.softwiz.main.domain.admin.CateSubBean" statementType="CALLABLE">
 		SELECT a.maincode, a.mainname, b.subcode, b.subname, b.subvalue, b.subvalue2, b.subvalue3, b.vieworder,
 		       b.usediv, b.etcdesc,to_char(b.createDate, 'YYYY-MM-DD') as createDay, b.deleteFlag
@@ -60,8 +61,8 @@
 	</select>
 
 	<!-- 大分類カテゴリ情報を取得する -->
-	<select id="getCateMainName" parameterType="jp.co.softwiz.main.domain.admin.CateSubBean"
-					resultType="jp.co.softwiz.main.domain.admin.CateSubBean" statementType="CALLABLE">
+	<select id="selectMaster" parameterType="jp.co.softwiz.main.domain.admin.CateMainBean"
+					resultType="jp.co.softwiz.main.domain.admin.CateMainBean" statementType="CALLABLE">
 		SELECT maincode, mainname
 		  FROM t_cate_main
 		 WHERE mainCode = #{mainCode}
@@ -91,31 +92,19 @@
 
 	</insert>
 
-	<!-- 中分類カテゴリ情報を変更する。 -->
-	<update id="updateCateSub" parameterType="jp.co.softwiz.main.domain.admin.CateSubBean" statementType="CALLABLE">
-		UPDATE t_cate_sub
-		   SET
-		   		subname = #{subName}
-			   ,subvalue = #{subValue}
-			   ,subvalue2 = #{subValue2}
-			   ,subvalue3 = #{subValue3}
-			   ,vieworder = #{viewOrder}
-			   ,usediv = #{useDiv}
-			   ,etcdesc = #{etcDesc}
-			   ,modifyDate = now()
-			   ,modifyUser = #{modifyUser}
-		 WHERE
-			   maincode = #{mainCode}
-		   AND subcode = #{subCode}
-	</update>
-
 	<!-- 中分類カテゴリ情報を削除する。 -->
-	<delete id="deleteCateSub" parameterType="jp.co.softwiz.main.domain.admin.CateSubBean" statementType="CALLABLE">
+	<delete id="deleteCateSubForMainKey" parameterType="jp.co.softwiz.main.domain.admin.CateMainBean" statementType="CALLABLE">
 		DELETE FROM t_cate_sub
 		 WHERE
-			   maincode = #{mainCode}
-		   AND subcode = #{subCode}
+			   maincode = #{maincode}
 	</delete>
+
+	<!-- 大分類カテゴリ情報を取得する -->
+	<select id="selectCateMainMaxKey" resultType="java.lang.String" statementType="CALLABLE">
+		SELECT trim(to_char(to_number(coalesce(max(maincode),'0'),'999')+1,'009'))
+		FROM t_cate_main
+
+	</select>
 
 
 </mapper>

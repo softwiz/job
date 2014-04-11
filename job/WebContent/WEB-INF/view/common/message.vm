@@ -1,0 +1,113 @@
+<input type="hidden" id="message_validate_required" name="message_validate_required" value="#springMessage('message.required')">
+<input type="hidden" id="message_validate_remote" name="message_validate_remote" value="#springMessage('message.remote')">
+<input type="hidden" id="message_validate_email" name="message_validate_email" value="#springMessage('message.email')">
+<input type="hidden" id="message_validate_url" name="message_validate_url" value="#springMessage('message.url')">
+<input type="hidden" id="message_validate_date" name="message_validate_date" value="#springMessage('message.date')">
+<input type="hidden" id="message_validate_dateISO" name="message_validate_dateISO" value="#springMessage('message.dateISO')">
+<input type="hidden" id="message_validate_number" name="message_validate_number" value="#springMessage('message.number')">
+<input type="hidden" id="message_validate_digits" name="message_validate_digits" value="#springMessage('message.digits')">
+<input type="hidden" id="message_validate_creditcard" name="message_validate_creditcard" value="#springMessage('message.creditcard')">
+<input type="hidden" id="message_validate_equalTo" name="message_validate_equalTo" value="#springMessage('message.equalTo')">
+<input type="hidden" id="message_validate_maxlength" name="message_validate_maxlength" value="#springMessage('message.maxlength')">
+<input type="hidden" id="message_validate_minlength" name="message_validate_minlength" value="#springMessage('message.minlength')">
+<input type="hidden" id="message_validate_rangelength" name="message_validate_rangelength" value="#springMessage('message.rangelength')">
+<input type="hidden" id="message_validate_range" name="message_validate_range" value="#springMessage('message.range')">
+<input type="hidden" id="message_validate_max" name="message_validate_max" value="#springMessage('message.max')">
+<input type="hidden" id="message_validate_min" name="message_validate_min" value="#springMessage('message.min')">
+
+<input type="hidden" id="message_alert_regist" name="message_alert_regist" value="#springMessage('message.box.regist')">
+<input type="hidden" id="message_alert_delete" name="message_alert_delete" value="#springMessage('message.box.delete')">
+<script>
+
+function dlgMessage(v) {
+
+jQuery('#alert-msg').text( v );
+
+// a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
+
+jQuery( "#dialog:ui-dialog" ).dialog( "destroy" );
+
+
+jQuery( "#dialog-message" ).dialog({
+
+modal: true,
+
+buttons: {
+
+"OK": function() {
+
+jQuery( this ).dialog( "close" );
+
+}
+
+}
+
+});
+
+}
+
+
+function initGridButtons() {
+
+jQuery( ".gridButton button:first" ).button({
+
+            icons: {
+
+                primary: "ui-icon-gear"
+
+            }
+
+        }).next().button({
+
+            icons: {
+
+                primary: "ui-icon-plus"
+
+            }
+
+        }).next().button({
+
+            icons: {
+
+                primary: "ui-icon-pencil"
+
+            }
+
+        }).next().button({
+
+            icons: {
+
+                primary: "ui-icon-trash"
+
+            }
+
+        });
+
+}
+
+</script>
+
+<div id="dialog-message"  title="dialog" style="display: none;">
+
+<p>
+
+<span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+
+<span id="alert-msg"></span>
+
+</p>
+
+</div>
+
+<div id="dialog-confirm" title= "dialog" style="display: none;">
+
+<p>
+
+<span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+
+<span id="confirm-msg"></span>
+
+</p>
+
+</div>
+

@@ -97,5 +97,9 @@ public class CommonConst {
 
 
 	/****** 共通エラー ******/
-	public static final String STRING_ERROR								= "error";
+	public static final String STRING_ERROR									= "error";
+
+	/****** DB関連 ******/
+	public static final String STRING_DELETE_FLAG_N							= "N";
+
 }

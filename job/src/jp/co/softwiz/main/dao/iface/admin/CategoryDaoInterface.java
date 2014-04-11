@@ -16,11 +16,15 @@ import jp.co.softwiz.main.domain.admin.CateMainBean;
 import jp.co.softwiz.main.domain.admin.CateSubBean;
 
 /**
- * @author sc-yang@softwiz.jp
+ * @author jk-yun@softwiz.jp
  * @version
  *
  */
 public interface CategoryDaoInterface extends MasterDetailDaoInterface<CateMainBean, CateSubBean> {
+
+	public String selectCateMainMaxKey();
+
+	public void deleteCateSubForMainKey(CateMainBean bean);
 
 	public void updateCateMainUseDiv(CateMainBean bean);
 }

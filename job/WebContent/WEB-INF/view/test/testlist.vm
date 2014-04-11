@@ -1,0 +1,58 @@
+﻿#parse ("common/header.vm")
+<script type="text/javascript" src='../common/js/test/testlist.js'></script>
+<div id="content">
+
+	<div id="breadcrumb">
+	<a href="../mypage/main.html">Home</a> / テストページ / <strong>テスト情報</strong></div>
+<h1>
+◎テスト情報
+</h1>
+<form id="f" name="f" action="../test/testlist.html" method="POST" class="f-wrap-2">
+<input type="hidden" id="testno" name="testno" value="">
+<fieldset>
+	<label for="searchTestno"><b>#springMessage('title.test.testno'):</b>
+		<input id="searchTestno" name="searchTestno" type="text" maxlength="255" value="$!{info.searchTestno}"/>
+	</label>
+	<label for="searchTestname"><b>#springMessage('title.test.testname'):</b>
+		<input id="searchTestname" name="searchTestname" type="text" maxlength="255" value="$!{info.searchTestname}"/>
+		<input id="btnSearch" class="f-submit" type="submit" name="btnSearch" value="検索"/>
+	</label>
+</fieldset>
+</form>
+<br>
+<div style="height:30px;text-align:right;">
+	Total Count : $!{list.size()}&nbsp;<input type="button" value="#springMessage('button.new')" onclick="goRegistForm('');">
+</div>
+<div height="800px">
+<table class="table1">
+    <thead>
+        <tr>
+            <th>#springMessage('title.test.testno')</th>
+            <th>#springMessage('title.test.testname')</th>
+            <th>#springMessage('title.test.yearmonthday')</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    	#foreach($bean in $!list)
+        <tr>
+            <td>$!bean.testno</td>
+            <td>$!bean.testname</td>
+            <td>$!bean.yearmonthday</td>
+            <td>
+            	<input type="button" value="#springMessage('button.update')" onclick="goRegistForm('$!bean.testno')">
+            	<input type="button" value="#springMessage('button.delete')" onclick="goDeleteForm('$!bean.testno')">
+            </td>
+        </tr>
+        #end
+		#if("$!list.size()" == "0" || "$!list.size()"=="")
+		<tr id="tablecontents" align="center">
+			<td colspan="4"><b>#springMessage("common.info.notResultList")</b></td>
+		</tr>
+		#end
+    </tbody>
+</table>
+</div>
+
+
+#parse ("common/bottom.vm")

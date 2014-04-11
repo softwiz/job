@@ -11,14 +11,14 @@
 
 package jp.co.softwiz.main.domain.admin;
 
-import jp.co.softwiz.main.domain.T_cate_mainVo;
+import jp.co.softwiz.main.domain.TCateMain;
 
 /**
  * @author jk-yun@softwiz.jp
  * @version
  *
  */
-public class CateMainBean extends  T_cate_mainVo{
+public class CateMainBean extends  TCateMain{
 	private String searchMainCode;	//検索条件：メインコード
 	private String searchMainName;	//検索条件：メイン名
 	private int subNum;				//サーブカテゴリの数

@@ -17,6 +17,7 @@
 
 
  	<mvc:annotation-driven/>
+
 	<aop:aspectj-autoproxy/>
 	<bean class="jp.co.softwiz.main.common.util.LoggingAspect" id="logAspect"></bean>
 	<bean class="jp.co.softwiz.main.common.util.LoginCheckAspect" id="loginAspect"></bean>
@@ -34,6 +35,13 @@
 			</list>
 		</property>
 	</bean>
+
+	<mvc:interceptors>
+        <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang" />
+        </bean>
+    </mvc:interceptors>
+
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
@@ -83,7 +91,7 @@
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource-${default.dbname}"/>
-		<property name="mapperLocations" value="classpath:jp/co/softwiz/main/mapper/*/*.xml"/>
+		<property name="mapperLocations" value="classpath:jp/co/softwiz/main/mapper/**/*.xml"/>
 	</bean>
 
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">

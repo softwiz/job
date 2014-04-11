@@ -28,8 +28,8 @@ public class LoginCheckAspect {
 	public ModelAndView writeFormAspect(ProceedingJoinPoint joinPoint) throws Throwable {
 	    LoginBean loginSession = null;
 	    ModelAndView view = new ModelAndView();
-	    HttpServletRequest req = (HttpServletRequest)joinPoint.getArgs()[0];
-	    Locale locales = null;
+
+    	HttpServletRequest req = (HttpServletRequest)joinPoint.getArgs()[0];
 	    HttpSession session = req.getSession();
 
 
@@ -41,7 +41,10 @@ public class LoginCheckAspect {
 	        }
 
 	        view = (ModelAndView) joinPoint.proceed();
-	        view.addObject("login", loginSession);
+	        if (view != null) {
+	        	view.addObject("login", loginSession);
+	        }
+
 	    }
 
 	    return view;
@@ -62,7 +65,5 @@ public class LoginCheckAspect {
 		 }
 		 return locales;
 	}
-
-
 
 }

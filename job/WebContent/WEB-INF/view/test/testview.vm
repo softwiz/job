@@ -1,0 +1,34 @@
+#parse ("common/header.vm")
+<div id="content">
+
+	<div id="breadcrumb">
+	<a href="../mypage/main.html">Home</a> / テストページ / <strong>テスト情報</strong></div>
+<h1>◎テスト登録</h1>
+<div id="form_container">
+<form id="f"  name="f" method="post" action="../test/testregist.html" class="f-wrap-1">
+<input type="hidden" name="searchTestno" value="$!{info.searchTestno}">
+<input type="hidden" name="searchTestname" value="$!{info.searchTestname}">
+<fieldset>
+<h3>基本情報</h3>
+	<label for="testno"><b>#springMessage('title.test.testno'):</b>
+		<input class="disabledtext" id="testno" name="testno" type="text" maxlength="3" value="$!{bean.testno}" readonly/>
+	</label>
+	<label for="testname"><b>#springMessage('title.test.testname'):</b>
+			<input id="testname" name="testname" type="text" maxlength="50" value="$!{bean.testname}"/>
+	</label>
+	<label for="yearmonthday"><b>#springMessage('title.test.yearmonthday'):</b>
+			<input id="yearmonthday" name="yearmonthday" type="text" maxlength="8" value="$!{bean.yearmonthday}"/>
+	</label>
+	<br>
+	<div class="f-submit-wrap">
+		<input id="saveForm"  class="f-submit" type="submit" name="submit" value=" 登録 "/>&nbsp;
+		<input id="saveForm"  class="f-submit" type="button" name="cancel" value=" 取消 " onclick="history.back();"><br />
+	</div>
+</fieldset>
+<br>
+
+</form>
+</div>
+</section>
+<script type="text/javascript" src='../common/js/test/testview.js'></script>
+#parse ("common/bottom.vm")

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Test">
+	<!-- ************************************************************************************************************* -->
+	<!-- カテゴリ情報  -->
+	<!-- ************************************************************************************************************* -->
+
+	<!-- 大分類カテゴリ情報を取得する -->
+	<select id="selectList" parameterType="jp.co.softwiz.main.domain.test.TestInfoBean"
+					resultType="jp.co.softwiz.main.domain.test.TestInfoBean" statementType="CALLABLE">
+
+		SELECT   testno, testname, yearmonthday, detailcontent, imagepath, filepath, createdate, createuser,
+    			 modifydate, modifyuser, deleteflag, deletedate, deleteuser
+		  FROM t_test_info
+		 WHERE deleteFlag = 'N'
+				 <if test='searchTestno != null'>
+				   AND testno like '%' || #{searchTestno} || '%'
+				 </if>
+				 <if test='searchTestname != null'>
+				   AND testname like '%' || #{searchTestname} || '%'
+				 </if>
+		ORDER BY testno
+	</select>
+
+	<!-- 大分類カテゴリ情報を取得する -->
+	<select id="selectTestInfoMaxKey" resultType="java.lang.String" statementType="CALLABLE">
+		SELECT trim(to_char(to_number(coalesce(max(testno),'0'),'999')+1,'009'))
+		FROM t_test_info
+
+	</select>
+
+
+</mapper>

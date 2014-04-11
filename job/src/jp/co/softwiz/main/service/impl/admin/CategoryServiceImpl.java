@@ -13,13 +13,17 @@ package jp.co.softwiz.main.service.impl.admin;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import jp.co.softwiz.main.common.constants.CommonConst;
 import jp.co.softwiz.main.common.constants.SystemProperties;
+import jp.co.softwiz.main.common.util.CommonUtil;
 import jp.co.softwiz.main.dao.iface.admin.CategoryDaoInterface;
 import jp.co.softwiz.main.domain.admin.CateMainBean;
 import jp.co.softwiz.main.domain.admin.CateSubBean;
 import jp.co.softwiz.main.service.iface.admin.CategoryServiceInterface;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -59,6 +63,41 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 	}
 
 	/**
+	 * 共通項目大分類情報を登録する。
+	 * @param String mainCode
+	 * @return List<CateMainBean>
+	 */
+	@Transactional
+	public void registMaster(HttpServletRequest request, CateMainBean bean){
+		bean.setDeleteflag(CommonConst.STRING_DELETE_FLAG_N);
+		bean.setModifydate(CommonUtil.getNowDate());
+		bean.setModifyuser(CommonUtil.getLoginUserId(request));
+		if (StringUtils.isEmpty(bean.getMaincode())) {
+			bean.setMaincode(categoryDao.selectCateMainMaxKey());
+			bean.setCreatedate(CommonUtil.getNowDate());
+			bean.setCreateuser(CommonUtil.getLoginUserId(request));
+			categoryDao.insertMaster(bean);
+		} else {
+			categoryDao.updateMaster(bean);
+		}
+	}
+
+	/**
+	 * 共通項目大分類情報を登録する。
+	 * @param String mainCode
+	 * @return List<CateMainBean>
+	 */
+	@Transactional
+	public void deleteMaster(HttpServletRequest request, CateMainBean bean){
+		bean.setDeleteflag(CommonConst.STRING_DELETE_FLAG_N);
+		bean.setDeletedate(CommonUtil.getNowDate());
+		bean.setDeleteuser(CommonUtil.getLoginUserId(request));
+
+		categoryDao.deleteMaster(bean);
+		categoryDao.deleteCateSubForMainKey(bean);
+	}
+
+	/**
 	 * 大分類の使用可否をアップデートする。
 	 * @param HttpServletRequest request
 	 * @return
@@ -77,8 +116,10 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 	}
 
 	public CateMainBean selectMaster(CateMainBean bean) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		if (StringUtils.isNotEmpty(bean.getMaincode()))
+			return categoryDao.selectMaster(bean);
+		else
+			return null;
 	}
 
 

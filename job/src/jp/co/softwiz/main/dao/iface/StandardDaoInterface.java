@@ -1,5 +1,5 @@
 /*
-	 * タイトル：ログインDaoInterface
+	 * タイトル：スタンダードDaoInterface
 	 * 説明    ：
 	 *
 	 * 著作権  ：Copyright(c) 2014 SOFTWIZ
@@ -19,18 +19,16 @@ import java.util.List;
  * @param <T>
  *
  */
-public interface MasterDetailDaoInterface<M, D> {
+public interface StandardDaoInterface<T> {
 
-	public List<M> selectMasterList(M bean);
+	public List<T> selectList(T bean);
 
-	public List<D> selectDetailList(M bean);
+	public T select(T bean);
 
-	public M selectMaster(M bean);
+	public void insert(T bean);
 
-	public void insertMaster(M bean);
+	public void update(T bean);
 
-	public void updateMaster(M bean);
-
-	public void deleteMaster(M bean);
+	public void delete(T bean);
 
 }

@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -1334,6 +1335,13 @@ public class CommonUtil{
      	return yearList;
 	}
 
+	public static Timestamp getNowDate() {
+		long now = System.currentTimeMillis();
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+     	return timestamp;
+	}
+
 	public static String getCurrentYear(String searchYear) {
 		String year;
 		if(searchYear==null) {
@@ -1379,4 +1387,5 @@ public class CommonUtil{
     	}
 		return list;
 	}
+
 }
