@@ -1,6 +1,5 @@
 <script>
 function movePage(page){
-	$('#f').attr('action', '../adm/admlist.html');
 	$('#movedPage').val(page);
 	$('#f').submit();
 }

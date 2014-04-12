@@ -8,6 +8,7 @@
 ◎テスト情報
 </h1>
 <form id="f" name="f" action="../test/testlist.html" method="POST" class="f-wrap-2">
+<input type="hidden" id="movedPage" name="movedPage" value="$!pageElements.MOVED_PAGE">
 <input type="hidden" id="testno" name="testno" value="">
 <fieldset>
 	<label for="searchTestno"><b>#springMessage('title.test.testno'):</b>
@@ -53,6 +54,10 @@
     </tbody>
 </table>
 </div>
-
+	<div style="width:100%;text-align:center;">
+			<!-------------------------- [Page] -------------------------->
+			#parse ("common/page.vm")
+			<!-------------------------- [/Page] ------------------------->
+	</div>
 
 #parse ("common/bottom.vm")

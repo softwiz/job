@@ -52,6 +52,15 @@ public class TestServiceImpl implements TestServiceInterface {
 	}
 
 	/**
+	 * 大分類の共通項目情報を取得する。
+	 * @param HttpServletRequest request
+	 * @return
+	 */
+	public int getSelectListCount(TestInfoBean bean) {
+		return testDao.getSelectListCount(bean);
+	}
+
+	/**
 	 * 共通項目大分類情報を登録する。
 	 * @param String mainCode
 	 * @return List<CateMainBean>

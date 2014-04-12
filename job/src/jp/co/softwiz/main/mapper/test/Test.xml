@@ -20,6 +20,22 @@
 				   AND testname like '%' || #{searchTestname} || '%'
 				 </if>
 		ORDER BY testno
+		limit 10 offset (#{movedPage}-1)*10
+	</select>
+
+	<!-- 大分類カテゴリ情報を取得する -->
+	<select id="getSelectListCount" parameterType="jp.co.softwiz.main.domain.test.TestInfoBean"
+					resultType="int" statementType="CALLABLE">
+
+		SELECT   count(*)
+		  FROM t_test_info
+		 WHERE deleteFlag = 'N'
+				 <if test='searchTestno != null'>
+				   AND testno like '%' || #{searchTestno} || '%'
+				 </if>
+				 <if test='searchTestname != null'>
+				   AND testname like '%' || #{searchTestname} || '%'
+				 </if>
 	</select>
 
 	<!-- 大分類カテゴリ情報を取得する -->

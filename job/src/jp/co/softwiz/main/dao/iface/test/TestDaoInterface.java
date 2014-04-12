@@ -23,4 +23,6 @@ public interface TestDaoInterface extends StandardDaoInterface<TestInfoBean> {
 
 	public String selectTestInfoMaxKey();
 
+	public int getSelectListCount(TestInfoBean bean);
+
 }

@@ -21,4 +21,5 @@ import jp.co.softwiz.main.service.iface.StandardServiceInterface;
  */
 public interface TestServiceInterface extends StandardServiceInterface<TestInfoBean> {
 
+	public int getSelectListCount(TestInfoBean bean);
 }

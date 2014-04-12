@@ -16,6 +16,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import jp.co.softwiz.main.common.constants.ModelConstants;
+import jp.co.softwiz.main.common.util.Pager;
 import jp.co.softwiz.main.domain.test.TestInfoBean;
 import jp.co.softwiz.main.service.iface.test.TestServiceInterface;
 
@@ -58,6 +59,7 @@ public class TestController {
 			bean = (TestInfoBean) map.get("bean");
 		}
         view.addObject("list", testService.selectList(bean));
+        view.addObject("pageElements", Pager.getPageElements(bean.getMovedPage(), testService.getSelectListCount(bean)));
         view.addObject("info", bean);
        return view;
     }

@@ -21,6 +21,11 @@ import jp.co.softwiz.main.domain.TTestInfo;
 public class TestInfoBean extends  TTestInfo{
 	private String searchTestno;	//検索条件：メインコード
 	private String searchTestname;	//検索条件：メイン名
+	private int movedPage;
+
+	public TestInfoBean() {
+		movedPage=1;
+	}
 	public String getSearchTestno() {
 		return searchTestno;
 	}
@@ -33,6 +38,14 @@ public class TestInfoBean extends  TTestInfo{
 	}
 	public void setSearchTestname(String searchTestname) {
 		this.searchTestname = searchTestname;
+	}
+
+	public int getMovedPage() {
+		return movedPage;
+	}
+
+	public void setMovedPage(int movedPage) {
+		this.movedPage = movedPage;
 	}
 
 

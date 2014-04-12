@@ -8,6 +8,7 @@
 <form id="f"  name="f" method="post" action="../test/testregist.html" class="f-wrap-1">
 <input type="hidden" name="searchTestno" value="$!{info.searchTestno}">
 <input type="hidden" name="searchTestname" value="$!{info.searchTestname}">
+<input type="hidden" id="movedPage" name="movedPage" value="$!{info.movedPage}">
 <fieldset>
 <h3>基本情報</h3>
 	<label for="testno"><b>#springMessage('title.test.testno'):</b>
