@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/properties/messages_en.properties=UTF-8
 encoding//WebContent/WEB-INF/view/admin/category.vm=UTF-8
+encoding//WebContent/WEB-INF/view/admin/categorysubview.vm=UTF-8
 encoding//WebContent/WEB-INF/view/admin/categoryview.vm=UTF-8
 encoding//WebContent/WEB-INF/view/admin/samplelist.vm=UTF-8
 encoding//WebContent/WEB-INF/view/admin/sampleregist.vm=UTF-8

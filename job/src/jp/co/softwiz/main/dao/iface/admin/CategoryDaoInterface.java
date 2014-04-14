@@ -24,6 +24,8 @@ public interface CategoryDaoInterface extends MasterDetailDaoInterface<CateMainB
 
 	public String selectCateMainMaxKey();
 
+	public String selectCateSubMaxKey(CateSubBean bean);
+
 	public void deleteCateSubForMainKey(CateMainBean bean);
 
 	public void updateCateMainUseDiv(CateMainBean bean);

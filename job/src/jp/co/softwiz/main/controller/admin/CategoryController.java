@@ -152,6 +152,45 @@ public class CategoryController {
         return view;
     }
 
+	/** カテゴリビュー
+	 * @param
+	 * @return ModelAndView
+	 */
+	@RequestMapping(value = ModelConstants.REQ_MAPPING_CATEGORY_SUB_VIEW, method = RequestMethod.POST)
+    public ModelAndView categorySubViewPage(HttpServletRequest request, CateSubBean bean)
+    {
+		/********************************************************************************/
+		/* ModelAndView 生成 */
+		/********************************************************************************/
+        ModelAndView view = new ModelAndView(ModelConstants.PAGE_MODEL_CATEGORY_SUB_VIEW);
+
+        view.addObject("info", bean);
+        view.addObject("bean", categoryService.selectDetail(bean));
+        return view;
+    }
+
+	/** カテゴリ情報登録
+	 * @param
+	 * @return ModelAndView
+	 */
+	@RequestMapping(value = ModelConstants.REQ_MAPPING_CATEGORY_SUB_REGIST, method = RequestMethod.POST)
+    public ModelAndView categorySubRegistPage(HttpServletRequest request, CateMainBean mainBean, CateSubBean bean)
+    {
+		/********************************************************************************/
+		/* ModelAndView 生成 */
+		/********************************************************************************/
+		ModelAndView view = new ModelAndView("redirect:.." + ModelConstants.REQ_MAPPING_CATEGORY + ".html");
+
+		//属性情報保存
+		FlashMap fm = RequestContextUtils.getOutputFlashMap(request);
+		fm.put("bean", mainBean);
+
+		categoryService.registDetail(request, bean);
+
+		return view;
+
+    }
+
 	/**
 	 * 共通項目中分類リストを取得する。
 	 * @param request

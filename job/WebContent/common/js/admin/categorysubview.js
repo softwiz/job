@@ -1,13 +1,17 @@
 jQuery(function() {
 	$( "#f" ).validate({
 	  rules: {
-		  mainname: {
+		  subname: {
 		      required: true,
 		      minlength: 1, maxlength:50
-	    },
+	      },
+	      subvalue: {
+		      required: true,
+		      minlength: 1, maxlength:50
+	      },
 	 	  etcdesc: {
 		      maxlength:150
-	    }
+	      }
 	  },
 	  errorElement: "span",
 	    errorPlacement: function(error, element) {

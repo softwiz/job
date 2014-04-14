@@ -3,91 +3,42 @@ package jp.co.softwiz.main.domain.admin;
 import jp.co.softwiz.main.domain.TCateSub;
 
 public class CateSubBean extends  TCateSub{
-	private String searchMainCode;	//検索条件：メインコード
-	private String searchMainName;	//検索条件：メイン名
-	private String mainName;		//メインコード
-	private String createDay; 	//生成日（YYYY-MM-DD）
-	private int maxViewOrder; 		//表示順番
-
-	/**
-	 * searchMainCodeを取得します。
-	 * @return searchMainCode
-	 */
-	public String getSearchMainCode() {
-	    return searchMainCode;
+	private String searchMaincode;	//検索条件：メインコード
+	private String searchMainname;	//検索条件：メイン名
+	private String mainname;		//メインコード
+	private String createday; 	//生成日（YYYY-MM-DD）
+	private int maxVieworder; 		//表示順番
+	public String getSearchMaincode() {
+		return searchMaincode;
+	}
+	public void setSearchMaincode(String searchMaincode) {
+		this.searchMaincode = searchMaincode;
+	}
+	public String getSearchMainname() {
+		return searchMainname;
+	}
+	public void setSearchMainname(String searchMainname) {
+		this.searchMainname = searchMainname;
+	}
+	public String getMainname() {
+		return mainname;
+	}
+	public void setMainname(String mainname) {
+		this.mainname = mainname;
+	}
+	public String getCreateday() {
+		return createday;
+	}
+	public void setCreateday(String createday) {
+		this.createday = createday;
+	}
+	public int getMaxVieworder() {
+		return maxVieworder;
+	}
+	public void setMaxVieworder(int maxVieworder) {
+		this.maxVieworder = maxVieworder;
 	}
 
-	/**
-	 * searchMainCodeを設定します。
-	 * @param searchMainCode searchMainCode
-	 */
-	public void setSearchMainCode(String searchMainCode) {
-	    this.searchMainCode = searchMainCode;
-	}
-
-	/**
-	 * searchMainNameを取得します。
-	 * @return searchMainName
-	 */
-	public String getSearchMainName() {
-	    return searchMainName;
-	}
-
-	/**
-	 * searchMainNameを設定します。
-	 * @param searchMainName searchMainName
-	 */
-	public void setSearchMainName(String searchMainName) {
-	    this.searchMainName = searchMainName;
-	}
-
-	/**
-	 * mainNameを取得します。
-	 * @return mainName
-	 */
-	public String getMainName() {
-	    return mainName;
-	}
-
-	/**
-	 * mainNameを設定します。
-	 * @param mainName mainName
-	 */
-	public void setMainName(String mainName) {
-	    this.mainName = mainName;
-	}
-
-	/**
-	 * createDayを取得します。
-	 * @return createDay
-	 */
-	public String getCreateDay() {
-	    return createDay;
-	}
-
-	/**
-	 * createDayを設定します。
-	 * @param createDay createDay
-	 */
-	public void setCreateDay(String createDay) {
-	    this.createDay = createDay;
-	}
-
-	/**
-	 * maxViewOrderを取得します。
-	 * @return maxViewOrder
-	 */
-	public int getMaxViewOrder() {
-	    return maxViewOrder;
-	}
-
-	/**
-	 * maxViewOrderを設定します。
-	 * @param maxViewOrder maxViewOrder
-	 */
-	public void setMaxViewOrder(int maxViewOrder) {
-	    this.maxViewOrder = maxViewOrder;
-	}
 
 
 }

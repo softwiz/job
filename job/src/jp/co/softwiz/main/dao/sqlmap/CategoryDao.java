@@ -51,4 +51,20 @@ public class CategoryDao extends SqlSessionDaoSupport {
 	public void deleteMaster(CateMainBean bean) {
 		sqlSessionTemplate.delete("TCateMainMapper.deleteByPrimaryKey", bean);
 	}
+
+	public CateSubBean selectDetail(CateSubBean bean) {
+		return sqlSessionTemplate.selectOne("TCateSubMapper.selectByPrimaryKey", bean);
+	}
+
+	public void insertDetail(CateSubBean bean) {
+		sqlSessionTemplate.insert("TCateSubMapper.insert", bean);
+	}
+
+	public void updateDetail(CateSubBean bean) {
+		sqlSessionTemplate.update("TCateSubMapper.updateByPrimaryKeySelective", bean);
+	}
+
+	public void deleteDetail(CateSubBean bean) {
+		sqlSessionTemplate.delete("TCateSubMapper.deleteByPrimaryKey", bean);
+	}
 }

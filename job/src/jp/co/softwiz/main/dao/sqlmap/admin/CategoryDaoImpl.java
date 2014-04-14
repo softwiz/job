@@ -14,6 +14,7 @@ package jp.co.softwiz.main.dao.sqlmap.admin;
 import jp.co.softwiz.main.dao.iface.admin.CategoryDaoInterface;
 import jp.co.softwiz.main.dao.sqlmap.CategoryDao;
 import jp.co.softwiz.main.domain.admin.CateMainBean;
+import jp.co.softwiz.main.domain.admin.CateSubBean;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -32,6 +33,14 @@ public class CategoryDaoImpl extends CategoryDao implements CategoryDaoInterface
 	 */
 	public String selectCateMainMaxKey() {
 		return sqlSessionTemplate.selectOne("Category.selectCateMainMaxKey");
+	}
+
+	/**
+	 * 大分類カテゴリのKEYを取得する。
+	 * @return String
+	 */
+	public String selectCateSubMaxKey(CateSubBean bean) {
+		return sqlSessionTemplate.selectOne("Category.selectCateSubMaxKey", bean);
 	}
 
 	/**

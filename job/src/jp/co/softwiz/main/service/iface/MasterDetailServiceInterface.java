@@ -30,7 +30,13 @@ public interface MasterDetailServiceInterface<M, D> {
 
 	public List<D> selectDetailList(M bean);
 
+	public D selectDetail(D bean);
+
 	public void registMaster(HttpServletRequest request, M bean);
 
 	public void deleteMaster(HttpServletRequest request, M bean);
+
+	public void registDetail(HttpServletRequest request, D bean);
+
+	public void deleteDetail(HttpServletRequest request, D bean);
 }

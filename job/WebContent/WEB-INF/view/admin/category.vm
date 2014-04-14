@@ -9,6 +9,7 @@
 </h1>
 <form id="f" name="f" action="../admin/category.html" method="POST" class="f-wrap-2">
 <input type="hidden" id="maincode" name="maincode" value="">
+<input type="hidden" id="subcode" name="subcode" value="">
 <fieldset>
 	<label for="searchUsercode"><b>#springMessage('title.category.maincode'):</b>
 		<input id="searchMainCode" name="searchMainCode" type="text" maxlength="255" value="$!{info.searchMainCode}"/>
@@ -62,10 +63,10 @@
     </tbody>
 </table>
 </div>
-<div id="detailView">
-<div style="height:30px;text-align:right;">
-	<input type="button" value="#springMessage('button.new')" onclick="goSubRegistForm('');">
-</div>
+<div id="detailView" style="display:none;">
+	<div style="height:30px;text-align:right;">
+		<input type="button" value="#springMessage('button.new')" onclick="goSubRegistForm('');">
+	</div>
 <table class="table1">
     <thead>
         <tr>
@@ -87,34 +88,32 @@
 <script>
 function viewCateSub(code) {
 	var table="";
-	$.ajax({
-	      url: "./categorySub.html?maincode="+code,
-	      type: "GET",
-	      success: function(data){
-	    	  $.each(data,function(i,item) {
-	    		  alert(item.subcode);
-	    		    table += '<tr>';
-					table += '<td>'+item.subcode+'</td>';
-					table += '<td>'+item.subname+'</td>';
-					table += '<td>'+item.subvalue+'</td>';
-					table += '<td>'+item.subvalue2+'</td>';
-					table += '<td>'+item.subvalue3+'</td>';
-					table += '<td>'+item.vieworder+'</td>';
-					table += '<td>'+item.usediv+'</td>';
-					table += '<td>'+item.createday+'</td>';
-					table += '<td>';
-					table += '<input type="button" value="修正" onclick="viewCateSub(\'$!bean.maincode\');">';
-					table += '<input type="button" value="削除" onclick="viewCateSub(\'$!bean.maincode\');">';
-					table += '</td>';
-					table += '</tr>';
-	    	  });
-	    	  if(json.length < 1){
-				  table += '<tr><td colspan="9" align="center">#springMessage("common.info.notResultList")</td></tr>';
-			  }
-			  Q('#detailView tbody').append(table);
+	$("#maincode").val(code);
+	$.getJSON("./categorysub.html?maincode="+code,function(json){
+		$.each(json,function(i,item){
+		    table += '<tr>';
+			table += '<td>'+item.subcode+'</td>';
+			table += '<td>'+item.subname+'</td>';
+			table += '<td>'+item.subvalue+'</td>';
+			table += '<td>'+item.subvalue2+'</td>';
+			table += '<td>'+item.subvalue3+'</td>';
+			table += '<td>'+item.vieworder+'</td>';
+			table += '<td>'+item.usediv+'</td>';
+			table += '<td>'+item.createday+'</td>';
+			table += '<td>';
+			table += '<input type="button" value="修正" onclick="viewCateSub(\'$!bean.maincode\');">&nbsp;';
+			table += '<input type="button" value="削除" onclick="viewCateSub(\'$!bean.maincode\');">';
+			table += '</td>';
+			table += '</tr>';
+		});
+		if(json.length < 1){
+			  table += '<tr><td colspan="9" align="center">#springMessage("common.info.notResultList")</td></tr>';
+		  }
+	  $('#detailView tbody tr').remove();
+  	  $('#detailView tbody').append(table);
+  	  $("#detailView").show('3000');
 
-	      }
-	    });
+	});
 
 }
 </script>

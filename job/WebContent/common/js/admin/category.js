@@ -25,3 +25,10 @@ function goDeleteForm(code) {
 	});
 
 }
+
+function goSubRegistForm(subcode) {
+	$('#subcode').val(subcode);
+	$('#f').attr('action', '../admin/categorysubview.html');
+	$('#f').submit();
+}
+

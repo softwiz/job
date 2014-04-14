@@ -48,35 +48,13 @@
 		ORDER BY vieworder
 	</select>
 
-	<!-- 中分類カテゴリ情報を取得する -->
-	<select id="selectDetail" parameterType="jp.co.softwiz.main.domain.admin.CateSubBean"
-					resultType="jp.co.softwiz.main.domain.admin.CateSubBean" statementType="CALLABLE">
-		SELECT a.maincode, a.mainname, b.subcode, b.subname, b.subvalue, b.subvalue2, b.subvalue3, b.vieworder,
-		       b.usediv, b.etcdesc,to_char(b.createDate, 'YYYY-MM-DD') as createDay, b.deleteFlag
-		  FROM t_cate_main a, t_cate_sub b
-		 WHERE a.mainCode = b.mainCode
-		   AND a.mainCode = #{mainCode}
-		   AND b.subCode = #{subCode}
-
-	</select>
-
-	<!-- 大分類カテゴリ情報を取得する -->
-	<select id="selectMaster" parameterType="jp.co.softwiz.main.domain.admin.CateMainBean"
-					resultType="jp.co.softwiz.main.domain.admin.CateMainBean" statementType="CALLABLE">
-		SELECT maincode, mainname
-		  FROM t_cate_main
-		 WHERE mainCode = #{mainCode}
-		ORDER BY mainCode
-
-	</select>
-
 	<!-- 中分類カテゴリリストを取得する -->
 	<select id="getCateSubListOrder" parameterType="jp.co.softwiz.main.domain.admin.CateSubBean"
 					resultType="jp.co.softwiz.main.domain.admin.CateSubBean" statementType="CALLABLE">
 		SELECT maincode, subcode, subname, subvalue, subvalue2, subvalue3, vieworder,
 		       usediv, etcdesc,to_char(createDate, 'YYYY-MM-DD') as createDay, deleteFlag
 		  FROM t_cate_sub
-		 WHERE mainCode = #{mainCode}
+		 WHERE mainCode = #{maincode}
 		ORDER BY vieworder  FOR UPDATE
 	</select>
 
@@ -85,10 +63,9 @@
 		INSERT INTO t_cate_sub(
 		            maincode, subcode, subname, subvalue, subvalue2, subvalue3, vieworder,
 		            usediv, etcdesc, createdate, createuser, modifydate, modifyuser, deleteflag)
-		    VALUES (#{mainCode}, (SELECT trim(to_char(to_number(coalesce(max(subCode),'0'),'999')+1,'009'))
-		  							FROM t_cate_sub where mainCode = #{mainCode}),
-					#{subName}, #{subValue}, #{subValue2}, #{subValue3}, #{viewOrder},
-		            #{useDiv}, #{etcDesc}, now(), #{createUser}, now(), #{createUser}, 'N');
+		    VALUES (#{maincode}, #{subcode},
+					#{subname}, #{subvalue}, #{subvalue2}, #{subvalue3}, #{vieworder},
+		            #{usediv}, #{etcdesc}, now(), #{createuser}, now(), #{createuser}, 'N');
 
 	</insert>
 
@@ -103,6 +80,14 @@
 	<select id="selectCateMainMaxKey" resultType="java.lang.String" statementType="CALLABLE">
 		SELECT trim(to_char(to_number(coalesce(max(maincode),'0'),'999')+1,'009'))
 		FROM t_cate_main
+
+	</select>
+
+	<!-- 大分類カテゴリ情報を取得する -->
+	<select id="selectCateSubMaxKey" parameterType="jp.co.softwiz.main.domain.admin.CateSubBean" resultType="java.lang.String" statementType="CALLABLE">
+		SELECT trim(to_char(to_number(coalesce(max(subcode),'0'),'999')+1,'009'))
+		  FROM t_cate_sub
+		 WHERE maincode = #{maincode}
 
 	</select>
 

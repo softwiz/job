@@ -33,4 +33,12 @@ public interface MasterDetailDaoInterface<M, D> {
 
 	public void deleteMaster(M bean);
 
+	public D selectDetail(D bean);
+
+	public void insertDetail(D bean);
+
+	public void updateDetail(D bean);
+
+	public void deleteDetail(D bean);
+
 }

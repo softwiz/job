@@ -101,6 +101,7 @@
 			</ul>
 		</div>
 <script>
+
 $(function(){
 	var path = window.location.pathname.split("/");
 	 if(path[3].indexOf("admlist.html")>=0) {

@@ -50,10 +50,10 @@ public class ModelConstants {
 	public static final String REQ_MAPPING_CATEGORY_REGIST							= "/admin/categoryregist";
 	public static final String REQ_MAPPING_CATEGORY_DELETE 							= "/admin/categorydelete";
 	public static final String REQ_MAPPING_CATE_MAIN_UPDATE 						= "/admin/categoryUpdate";
-	public static final String REQ_MAPPING_GET_CATE_SUB_LIST 						= "/admin/categorySub";
-	public static final String REQ_MAPPING_CATE_SUB_VIEW 							= "/admin/categorySubView";
-	public static final String REQ_MAPPING_CATE_SUB_UPDATE 							= "/admin/categorySubUpdate";
-	public static final String REQ_MAPPING_CATE_SUB_DELETE 							= "/admin/categorySubDelete";
+	public static final String REQ_MAPPING_GET_CATE_SUB_LIST 						= "/admin/categorysub";
+	public static final String REQ_MAPPING_CATEGORY_SUB_VIEW 						= "/admin/categorysubview";
+	public static final String REQ_MAPPING_CATEGORY_SUB_REGIST 						= "/admin/categorysubregist";
+	public static final String REQ_MAPPING_CATEGORY_SUB_DELETE 						= "/admin/categorysubdelete";
 
 	//テスト情報
 	public static final String REQ_MAPPING_TEST_LIST 								= "/test/testlist";
@@ -76,7 +76,7 @@ public class ModelConstants {
 	//カテゴリ情報
 	public static final String PAGE_MODEL_CATEGORY_MAIN 							= "/admin/category";
 	public static final String PAGE_MODEL_CATEGORY_VIEW 							= "/admin/categoryview";
-	public static final String PAGE_MODEL_CATEGORY_SUB 								= "/admin/categorySub";
+	public static final String PAGE_MODEL_CATEGORY_SUB_VIEW							= "/admin/categorysubview";
 
 	//テスト情報
 	public static final String PAGE_MODEL_TEST_LIST 								= "/test/testlist";
