@@ -20,7 +20,7 @@ jQuery(function() {
 	    },
 	  submitHandler: function(form) {
 		  $('#submit').attr('disabled','disabled');
-		  form.submit();
+		  $('#submit').submit();
 	  }
 
 	});

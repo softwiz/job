@@ -2,11 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>：：：FOCUS WorkFLow：：：</title>
+    <title>：：：SOFTWIZ：：：</title>
     <META http-equiv="Expires" content="-1">
 	<META http-equiv="Pragma" content="no-cache">
 	<META http-equiv="Cache-Control" content="No-Cache">
-    <meta name="viewport" content="width=device-width" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="../common/css/common.css" media="screen">
     <link rel="stylesheet" href="../common/css/jquery-ui-1.10.3.custom.css" media="screen">
     <link rel="stylesheet" href="../common/css/select2.css" media="screen">
@@ -14,7 +15,12 @@
     <link rel="stylesheet" type="text/css" href="../common/css/jquery.cleditor.css" />
     <link href='../common/css/fullcalendar.css' rel='stylesheet' />
 	<link href='../common/css/fullcalendar.print.css' rel='stylesheet' media='print' />
-<script type="text/javascript" src="../common/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../common/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../common/js/jquery.linq.min.js"></script>
+<script type="text/javascript" src="../common/js/linq.min.js"></script>
+<script type="text/javascript" src="../common/js/common.js"></script>
+<script type="text/javascript" src="../common/js/ejs_production.js"></script>
+<script type="text/javascript" src="../common/js/view.js"></script>
 <script type="text/javascript" src="../common/js/jquery.validate.js"></script>
 <script type="text/javascript" src="../common/js/jquery.i18n.properties-1.0.9.js"></script>
 <script type="text/javascript" src="../common/js/ckeditor/ckeditor.js"></script>

@@ -19,7 +19,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 @Aspect
 public class LoginCheckAspect {
 
-	@Pointcut("execution(* jp.co.softwiz.main.controller..*(..))")
+	@Pointcut("execution(* jp.co.softwiz.main.controller..*(*Page))")
 	public void formLogin() {
 	}
 
@@ -39,8 +39,11 @@ public class LoginCheckAspect {
 	        if (StringUtils.isNotEmpty(locale)) {
 	        	session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, this.setLocales(locale));
 	        }
-
-	        view = (ModelAndView) joinPoint.proceed();
+	        try {
+	        	view = (ModelAndView) joinPoint.proceed();
+	        } catch (ClassCastException e) {
+	        	view = new ModelAndView();
+	        }
 	        if (view != null) {
 	        	view.addObject("login", loginSession);
 	        }

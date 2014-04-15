@@ -11,13 +11,10 @@
 
 package jp.co.softwiz.main.controller.admin;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import jp.co.softwiz.main.common.constants.ModelConstants;
 import jp.co.softwiz.main.domain.admin.CateMainBean;
@@ -29,6 +26,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContextUtils;
@@ -196,22 +194,18 @@ public class CategoryController {
 	 * @param request
 	 * @param response
 	 * @param mainCode
+	 * @return
 	 * @see
 	 *
 	 */
-	@RequestMapping(value = ModelConstants.REQ_MAPPING_GET_CATE_SUB_LIST, method = RequestMethod.GET)
-	public void getCateSubList(HttpServletRequest request, HttpServletResponse response
-											,CateMainBean bean) throws IOException {
+	@RequestMapping(value = ModelConstants.REQ_MAPPING_GET_CATE_SUB_LIST, method = RequestMethod.POST)
+	public @ResponseBody String getCateSubList(HttpServletRequest request, CateMainBean bean) {
+
 		List<CateSubBean> subList =  categoryService.selectDetailList(bean);
-
-		response.setContentType( "application/json" );
-	    response.setCharacterEncoding( "UTF-8" );
-		response.setHeader("Cache-Control", "no-cache");
-		PrintWriter writer = response.getWriter();
-		writer.print(new Gson().toJson( subList) );
-		writer.close();
+		Gson gson = new Gson();
+		System.out.println(gson.toJson(subList));
+		return gson.toJson(subList);
 	}
-
 
 
 }

@@ -22,7 +22,7 @@
 </form>
 <br>
 <div style="height:30px;text-align:right;">
-	Total Count : $!{list.size()}&nbsp;<input type="button" value="#springMessage('button.new')" onclick="goRegistForm('');">
+	Total Count : $!{list.size()}&nbsp;<input type="button" id="btnNew" value="#springMessage('button.new')" onclick="goRegistForm('');">
 </div>
 <div height="800px">
 <table class="table1">
@@ -67,7 +67,7 @@
 	<div style="height:30px;text-align:right;">
 		<input type="button" value="#springMessage('button.new')" onclick="goSubRegistForm('');">
 	</div>
-<table class="table1">
+<table class="table1" >
     <thead>
         <tr>
             <th>中分類コード</th>
@@ -81,36 +81,43 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="detailTbl">
     </tbody>
  </table>
 </div>
 <script>
+$(document).ready(function (){
+	if ("$!{info.maincode}" != "") {
+		viewCateSub("$!{info.maincode}");
+	}
+});
+
 function viewCateSub(code) {
-	var table="";
 	$("#maincode").val(code);
-	$.getJSON("./categorysub.html?maincode="+code,function(json){
-		$.each(json,function(i,item){
-		    table += '<tr>';
-			table += '<td>'+item.subcode+'</td>';
-			table += '<td>'+item.subname+'</td>';
-			table += '<td>'+item.subvalue+'</td>';
-			table += '<td>'+item.subvalue2+'</td>';
-			table += '<td>'+item.subvalue3+'</td>';
-			table += '<td>'+item.vieworder+'</td>';
-			table += '<td>'+item.usediv+'</td>';
-			table += '<td>'+item.createday+'</td>';
-			table += '<td>';
-			table += '<input type="button" value="修正" onclick="viewCateSub(\'$!bean.maincode\');">&nbsp;';
-			table += '<input type="button" value="削除" onclick="viewCateSub(\'$!bean.maincode\');">';
-			table += '</td>';
-			table += '</tr>';
+	Common.asyncPost("./categorysub.html", {maincode:code}, function (data){
+		$('#detailView tbody tr').remove();
+		$.each(data,function(i,item){
+			var tag="";
+			tag += '<input type="button" value="修正" onclick="goSubRegistForm(\'' + item.subcode + '\');">&nbsp;';
+			tag += '<input type="button" value="削除" onclick="goSubRegistForm(\'' + item.subcode + '\');">';
+			var oRow = detailTbl.insertRow();
+			oRow.insertCell(0).innerHTML = item.subcode;
+			oRow.insertCell(1).innerHTML = item.subname;
+			oRow.insertCell(2).innerHTML = item.subvalue;
+			oRow.insertCell(3).innerHTML = item.subvalue2;
+			oRow.insertCell(4).innerHTML = item.subvalue3;
+			oRow.insertCell(5).innerHTML = item.vieworder;
+			oRow.insertCell(6).innerHTML = item.usediv;
+			oRow.insertCell(7).innerHTML = item.createday;
+			oRow.insertCell(8).innerHTML = tag;
 		});
-		if(json.length < 1){
-			  table += '<tr><td colspan="9" align="center">#springMessage("common.info.notResultList")</td></tr>';
+		if(data.length < 1){
+			var oRow = detailTbl.insertRow();
+			var oCell1 = oRow.insertCell();
+			 oCell1.colSpan="9";
+			 oCell1.align = "center";
+			 oCell1.innerHTML = '#springMessage("common.info.notResultList")';
 		  }
-	  $('#detailView tbody tr').remove();
-  	  $('#detailView tbody').append(table);
   	  $("#detailView").show('3000');
 
 	});

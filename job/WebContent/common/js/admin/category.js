@@ -1,4 +1,3 @@
-
 function goRegistForm(code) {
 	$('#maincode').val(code);
 	$('#f').attr('action', '../admin/categoryview.html');
