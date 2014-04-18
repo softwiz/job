@@ -2,7 +2,7 @@ package jp.co.softwiz.main.domain.admin;
 
 import jp.co.softwiz.main.domain.TCateSub;
 
-public class CateSubBean extends  TCateSub{
+public class CateSubBean extends  TCateSub {
 	private String searchMaincode;	//検索条件：メインコード
 	private String searchMainname;	//検索条件：メイン名
 	private String mainname;		//メインコード

@@ -36,6 +36,20 @@
 		</property>
 	</bean>
 
+	<bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+	    <property name="hostName" value="115.179.36.73"/>
+	    <property name="port" value="6379"/>
+	    <property name="password" value="gunny21"/>
+	    <property name="usePool" value="true" />
+	</bean>
+
+	<bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"
+		p:connection-factory-ref="connectionFactory"/>
+
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" p:connection-factory-ref="connectionFactory" p:key-serializer-ref="stringKeySerializer"/>
+
+	<bean id ="stringKeySerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+
 	<mvc:interceptors>
         <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
             <property name="paramName" value="lang" />

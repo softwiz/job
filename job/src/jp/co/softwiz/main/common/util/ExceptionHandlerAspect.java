@@ -12,14 +12,11 @@ public class ExceptionHandlerAspect {
 
 	private static final Logger		logger	= Logger.getLogger(ExceptionHandlerAspect.class);
 
-    @ExceptionHandler(Exception.class)
-    public void handleException(Exception e) {
-    	logger.error(e.getMessage());
-    }
 
-    @ExceptionHandler(RuntimeException.class)
-    public ModelAndView handleRuntimeException(RuntimeException e) {
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleRuntimeException(Exception e) {
     	ModelAndView view = new ModelAndView(ModelConstants.PAGE_MODEL_ERROR);
+    	logger.error(e.toString());
         view.addObject("exception", e.getClass().getName());
         view.addObject("exceptionMessage", e.getMessage());
 

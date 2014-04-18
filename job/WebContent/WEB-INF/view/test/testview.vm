@@ -20,6 +20,13 @@
 	<label for="yearmonthday"><b>#springMessage('title.test.yearmonthday'):</b>
 			<input id="yearmonthday" name="yearmonthday" type="text" maxlength="8" value="$!{bean.yearmonthday}"/>
 	</label>
+	<label for="job"><b>職業:</b>
+		<select name="job">
+			#foreach($!bean in $!job)
+			<option value="$!bean.subcode" #if("$!bean.subcode"=="$!info.job")selected#end>$!bean.subvalue</option>
+			#end
+			</select>
+	</label>
 	<br>
 	<div class="f-submit-wrap">
 		<input id="saveForm"  class="f-submit" type="submit" name="submit" value=" 登録 "/>&nbsp;

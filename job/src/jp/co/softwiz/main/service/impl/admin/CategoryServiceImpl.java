@@ -26,6 +26,7 @@ import jp.co.softwiz.main.service.iface.admin.CategoryServiceInterface;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,6 +42,11 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 	//カテゴリDAO(DI)
 	@Qualifier("Category-" + SystemProperties.FACTORY_DB)
 	@Autowired private CategoryDaoInterface	categoryDao;
+
+	@Autowired
+	private RedisTemplate<String, List<CateSubBean>> redisTemplate;
+
+
 
 	/**
 	 * 大分類の共通項目情報を取得する。
@@ -101,6 +107,7 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 		} else {
 			categoryDao.updateMaster(bean);
 		}
+
 	}
 
 	/**
@@ -116,6 +123,7 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 
 		categoryDao.deleteMaster(bean);
 		categoryDao.deleteCateSubForMainKey(bean);
+		redisTemplate.opsForValue().set("code_" + bean.getMaincode(), null);
 	}
 
 	/**
@@ -152,6 +160,9 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 			setBetterViewOrder(bean, cateSubList, preViewOrder);
 		else
 			setLessViewOrder(bean, cateSubList, preViewOrder);
+
+		redisTemplate.opsForValue().set("code_" + bean.getMaincode(), categoryDao.selectDetailList(mainBean));
+
 	}
 
 	/**
@@ -166,6 +177,9 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
 		bean.setDeleteuser(CommonUtil.getLoginUserId(request));
 
 		categoryDao.deleteDetail(bean);
+		CateMainBean mainBean = new CateMainBean();
+		mainBean.setMaincode(bean.getMaincode());
+		redisTemplate.opsForValue().set("code_" + bean.getMaincode(), categoryDao.selectDetailList(mainBean));
 	}
 
 	/**

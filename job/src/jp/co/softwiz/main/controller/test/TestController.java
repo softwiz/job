@@ -11,16 +11,19 @@
 
 package jp.co.softwiz.main.controller.test;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import jp.co.softwiz.main.common.constants.ModelConstants;
 import jp.co.softwiz.main.common.util.Pager;
+import jp.co.softwiz.main.domain.admin.CateSubBean;
 import jp.co.softwiz.main.domain.test.TestInfoBean;
 import jp.co.softwiz.main.service.iface.test.TestServiceInterface;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +42,9 @@ public class TestController {
 
 	//カテゴリサービス(DI)
 	@Autowired private TestServiceInterface	testService;
+
+	@Autowired
+	private RedisTemplate<String, List<CateSubBean>> redisTemplate;
 
 	/**
 	 * カテゴリ画面初期
@@ -77,6 +83,8 @@ public class TestController {
         ModelAndView view = new ModelAndView(ModelConstants.PAGE_MODEL_TEST_VIEW);
 
         view.addObject("info", bean);
+        List<CateSubBean> list = redisTemplate.boundValueOps("code_001").get();
+        view.addObject("job", redisTemplate.boundValueOps("code_001").get());
         view.addObject("bean", testService.select(bean));
         return view;
     }

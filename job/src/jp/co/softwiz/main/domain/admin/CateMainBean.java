@@ -11,6 +11,8 @@
 
 package jp.co.softwiz.main.domain.admin;
 
+import java.io.Serializable;
+
 import jp.co.softwiz.main.domain.TCateMain;
 
 /**
@@ -18,7 +20,7 @@ import jp.co.softwiz.main.domain.TCateMain;
  * @version
  *
  */
-public class CateMainBean extends  TCateMain{
+public class CateMainBean extends  TCateMain implements Serializable {
 	private String searchMainCode;	//検索条件：メインコード
 	private String searchMainName;	//検索条件：メイン名
 	private int subNum;				//サーブカテゴリの数

@@ -19,8 +19,8 @@ jQuery(function() {
 	        error.css("margin", "0 0 0 5px");
 	    },
 	  submitHandler: function(form) {
-		  $('#submit').attr('disabled','disabled');
-		  $('#submit').submit();
+		  form.attr('disabled','disabled');
+		  form.submit();
 	  }
 
 	});
